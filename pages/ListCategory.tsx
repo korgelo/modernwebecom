@@ -1,10 +1,28 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { MOCK_POSTS } from "../constants";
 import BlogCard from "../components/BlogCard";
+import { Category } from "../types";
 import { ArrowRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
+// Map slugs to Category enum values
+const slugToCategoryMap: Record<string, Category> = {
+  "headset": Category.AUDIO_DEVICES,
+  "laptops": Category.LAPTOP_PC,
+  "phones": Category.SMARTPHONES,
+  "smart-home": Category.SMART_HOME,
+  "guides": Category.BUYING_GUIDES,
+  "comparisons": Category.COMPARISONS,
+  "how-to": Category.HOW_TO,
+};
+
 const ListCategory: React.FC = () => {
+  const { cat } = useParams<{ cat: string }>();
+  const category = cat ? slugToCategoryMap[cat] : undefined;
+  const filteredPosts = category
+    ? MOCK_POSTS.filter((post) => post.category === category)
+    : MOCK_POSTS;
   return (
     <div className="pb-20">
       {/* Main Content Grid */}
@@ -14,14 +32,14 @@ const ListCategory: React.FC = () => {
           <main>
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
-                Latest Reviews{" "}
+                {category || "All Reviews"}{" "}
                 <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
               </h2>
               <Link
-                to="/reviews"
+                to="/"
                 className="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center gap-1 group"
               >
-                View All{" "}
+                Back to Home{" "}
                 <ArrowRight
                   size={16}
                   className="group-hover:translate-x-1 transition-transform"
@@ -30,7 +48,7 @@ const ListCategory: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {MOCK_POSTS.map((post) => (
+              {filteredPosts.map((post) => (
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
@@ -45,4 +63,4 @@ const ListCategory: React.FC = () => {
   );
 };
 
-export default Home;
+export default ListCategory;
