@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { MOCK_POSTS } from "../constants";
+import { MOCK_POSTS, AFFILIATE_DISCLAIMER } from "../constants";
 import { AffiliateCTA, ComparisonTable } from "../components/ReviewUI";
 import {
   Clock,
@@ -251,9 +251,7 @@ const PostDetail: React.FC = () => {
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  TechVantage uses affiliate links. If you click a link and buy
-                  something, we may receive a commission. This helps keep our
-                  reviews free and unbiased.
+                  {AFFILIATE_DISCLAIMER}
                 </p>
               </div>
             </div>

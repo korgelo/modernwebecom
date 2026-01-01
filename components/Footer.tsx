@@ -1,8 +1,14 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Monitor, Twitter, Facebook, Instagram, Youtube, Mail } from 'lucide-react';
-import { SITE_NAME, AFFILIATE_DISCLAIMER } from '../constants';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Monitor,
+  Twitter,
+  Facebook,
+  Instagram,
+  Youtube,
+  Mail,
+} from "lucide-react";
+import { SITE_NAME, AFFILIATE_DISCLAIMER } from "../constants";
 
 const Footer: React.FC = () => {
   return (
@@ -15,48 +21,137 @@ const Footer: React.FC = () => {
                 <Monitor className="text-white" size={20} />
               </div>
               <span className="text-xl font-extrabold tracking-tight text-white">
-                TECH<span className="text-blue-500">VANTAGE</span>
+                SUYOOH<span className="text-blue-500">TECH</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Empowering US consumers with honest, data-driven technology reviews and expert buying advice since 2018. Your shortcut to better gadget choices.
+              Empowering US consumers with honest, data-driven technology
+              reviews and expert buying advice since 2018. Your shortcut to
+              better gadget choices.
             </p>
             <div className="flex space-x-4">
-              <Twitter className="hover:text-white cursor-pointer transition-colors" size={20} />
-              <Facebook className="hover:text-white cursor-pointer transition-colors" size={20} />
-              <Instagram className="hover:text-white cursor-pointer transition-colors" size={20} />
-              <Youtube className="hover:text-white cursor-pointer transition-colors" size={20} />
+              <Twitter
+                className="hover:text-white cursor-pointer transition-colors"
+                size={20}
+              />
+              <Facebook
+                className="hover:text-white cursor-pointer transition-colors"
+                size={20}
+              />
+              <Instagram
+                className="hover:text-white cursor-pointer transition-colors"
+                size={20}
+              />
+              <Youtube
+                className="hover:text-white cursor-pointer transition-colors"
+                size={20}
+              />
             </div>
           </div>
 
           <div>
             <h3 className="text-white font-bold mb-6">Popular Categories</h3>
             <ul className="space-y-4 text-sm">
-              <li><Link to="/category/laptops" className="hover:text-blue-400 transition-colors">Laptop Reviews</Link></li>
-              <li><Link to="/category/phones" className="hover:text-blue-400 transition-colors">Smartphone Guides</Link></li>
-              <li><Link to="/category/smart-home" className="hover:text-blue-400 transition-colors">Smart Home Gear</Link></li>
-              <li><Link to="/category/gaming" className="hover:text-blue-400 transition-colors">PC Gaming Hardware</Link></li>
-              <li><Link to="/category/deals" className="hover:text-blue-400 transition-colors">Daily Tech Deals</Link></li>
+              <li>
+                <Link
+                  to="/category/laptops"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Laptop Reviews
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/category/phones"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Smartphone Guides
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/category/smart-home"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Smart Home Gear
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/category/gaming"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  PC Gaming Hardware
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/category/deals"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Daily Tech Deals
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-white font-bold mb-6">Company</h3>
             <ul className="space-y-4 text-sm">
-              <li><Link to="/about" className="hover:text-blue-400 transition-colors">About TechVantage</Link></li>
-              <li><Link to="/editorial-standards" className="hover:text-blue-400 transition-colors">Editorial Standards</Link></li>
-              <li><Link to="/privacy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:text-blue-400 transition-colors">Terms of Service</Link></li>
-              <li><Link to="/affiliate-disclosure" className="hover:text-blue-400 transition-colors">Affiliate Disclosure</Link></li>
+              <li>
+                <Link
+                  to="/about"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  About TechVantage
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/editorial-standards"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Editorial Standards
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/privacy"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/terms"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/affiliate-disclosure"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Affiliate Disclosure
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-white font-bold mb-6">Newsletter</h3>
-            <p className="text-sm mb-4">Get the best tech news and deals delivered weekly.</p>
+            <p className="text-sm mb-4">
+              Get the best tech news and deals delivered weekly.
+            </p>
             <form className="space-y-3">
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={16} />
+                <Mail
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
+                  size={16}
+                />
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -71,14 +166,19 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="text-xs text-slate-500 space-y-4">
-          <p className="italic leading-relaxed">
-            {AFFILIATE_DISCLAIMER}
-          </p>
+          <p className="italic leading-relaxed">{AFFILIATE_DISCLAIMER}</p>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-800 pt-8">
-            <p>&copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved. Designed for US Consumers.</p>
+            <p>
+              &copy; {new Date().getFullYear()} {SITE_NAME}. All rights
+              reserved. Designed for US Consumers.
+            </p>
             <div className="flex gap-6">
-              <Link to="/sitemap" className="hover:text-slate-300">Sitemap</Link>
-              <Link to="/contact" className="hover:text-slate-300">Contact Us</Link>
+              <Link to="/sitemap" className="hover:text-slate-300">
+                Sitemap
+              </Link>
+              <Link to="/contact" className="hover:text-slate-300">
+                Contact Us
+              </Link>
             </div>
           </div>
         </div>

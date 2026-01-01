@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
   const featuredPost = MOCK_POSTS.find((p) => p.featured) || MOCK_POSTS[0];
-  const latestPosts = MOCK_POSTS.slice(0, 6);
+  const latestPosts = MOCK_POSTS.slice(0);
 
   return (
     <div className="pb-20">
@@ -56,25 +56,25 @@ const Home: React.FC = () => {
                     Editor Score
                   </span>
                   <span className="text-lg font-black text-slate-900">
-                    9.4/10
+                    {featuredPost.product.rating}
                   </span>
                 </div>
                 <div className="w-px h-8 bg-slate-100"></div>
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-slate-400 uppercase">
-                    Performance
+                    Brand
                   </span>
                   <span className="text-lg font-black text-slate-900">
-                    Elite
+                    {featuredPost.product.brand}
                   </span>
                 </div>
                 <div className="w-px h-8 bg-slate-100"></div>
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-slate-400 uppercase">
-                    Value
+                    Price
                   </span>
                   <span className="text-lg font-black text-slate-900">
-                    High
+                    {featuredPost.product.price}
                   </span>
                 </div>
               </div>
@@ -129,10 +129,6 @@ const Home: React.FC = () => {
               {latestPosts.map((post) => (
                 <BlogCard key={post.id} post={post} />
               ))}
-              {/* Duplicate some posts for mock appearance */}
-              {/* {MOCK_POSTS.map((post) => (
-                <BlogCard key={`copy-${post.id}`} post={post} />
-              ))} */}
             </div>
 
             <button className="w-full mt-12 py-4 border-2 border-slate-200 text-slate-500 font-bold rounded-2xl hover:bg-slate-50 hover:border-slate-300 transition-all uppercase tracking-widest text-xs">

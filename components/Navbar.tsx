@@ -27,9 +27,9 @@ const Navbar: React.FC = () => {
     },
     { name: Category.LAPTOP_PC, icon: <Monitor size={18} />, slug: "laptops" },
     {
-      name: Category.SMARTPHONES,
+      name: Category.SMARTWATCH,
       icon: <Smartphone size={18} />,
-      slug: "phones",
+      slug: "smartwatch",
     },
     { name: Category.SMART_HOME, icon: <Home size={18} />, slug: "smart-home" },
     {
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
               <span className="text-2xl font-extrabold tracking-tight text-slate-900">
                 SUYOOH<span className="text-blue-600">TECH</span>
                 <span className="text-[10px] bg-slate-100 px-1.5 py-0.5 rounded ml-1 font-bold text-slate-500 align-top uppercase tracking-widest">
-                  EXP
+                  BLOG
                 </span>
               </span>
             </Link>

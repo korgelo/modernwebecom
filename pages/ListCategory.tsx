@@ -8,13 +8,9 @@ import { Link } from "react-router-dom";
 
 // Map slugs to Category enum values
 const slugToCategoryMap: Record<string, Category> = {
-  "headset": Category.AUDIO_DEVICES,
-  "laptops": Category.LAPTOP_PC,
-  "phones": Category.SMARTPHONES,
-  "smart-home": Category.SMART_HOME,
-  "guides": Category.BUYING_GUIDES,
-  "comparisons": Category.COMPARISONS,
-  "how-to": Category.HOW_TO,
+  headset: Category.AUDIO_DEVICES,
+  laptops: Category.LAPTOP_PC,
+  smartwatch: Category.SMARTWATCH,
 };
 
 const ListCategory: React.FC = () => {
