@@ -161,9 +161,9 @@ const Home: React.FC = () => {
               </h3>
               <div className="space-y-4 relative z-10">
                 {[
-                  { category: Category.AUDIO_DEVICES, image: "https://picsum.photos/id/96/200/200" },
-                  { category: Category.LAPTOP_PC, image: "https://picsum.photos/id/0/200/200" },
-                  { category: Category.SMARTWATCH, image: "https://picsum.photos/id/175/200/200" },
+                  { category: "Headset", image: "https://picsum.photos/id/96/200/200" },
+                  { category: "Laptops", image: "https://picsum.photos/id/0/200/200" },
+                  { category: "Smartwatch", image: "https://picsum.photos/id/175/200/200" },
                 ].map((item) => (
                   <Link
                     key={item.category}

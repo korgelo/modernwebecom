@@ -20,14 +20,14 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
+    { name: "Laptops", icon: <Monitor size={18} />, slug: "laptops" },
     {
-      name: Category.AUDIO_DEVICES,
+      name: "Headset",
       icon: <Headset size={18} />,
       slug: "headset",
     },
-    { name: Category.LAPTOP_PC, icon: <Monitor size={18} />, slug: "laptops" },
     {
-      name: Category.SMARTWATCH,
+      name: "Smartwatch",
       icon: <Smartphone size={18} />,
       slug: "smartwatch",
     },
