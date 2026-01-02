@@ -31,18 +31,6 @@ const Navbar: React.FC = () => {
       icon: <Smartphone size={18} />,
       slug: "smartwatch",
     },
-    { name: Category.SMART_HOME, icon: <Home size={18} />, slug: "smart-home" },
-    {
-      name: Category.BUYING_GUIDES,
-      icon: <BookOpen size={18} />,
-      slug: "guides",
-    },
-    {
-      name: Category.COMPARISONS,
-      icon: <Scaling size={18} />,
-      slug: "comparisons",
-    },
-    { name: Category.HOW_TO, icon: <Wrench size={18} />, slug: "how-to" },
   ];
 
   return (
