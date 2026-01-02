@@ -1,5 +1,5 @@
 export enum Category {
-  LAPTOP_PC = "laptop",
+  LAPTOP_PC = "laptops",
   SMARTWATCH = "smartwatch",
   AUDIO_DEVICES = "headset",
 }

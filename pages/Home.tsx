@@ -161,28 +161,28 @@ const Home: React.FC = () => {
               </h3>
               <div className="space-y-4 relative z-10">
                 {[
-                  { category: "Headset", image: "https://picsum.photos/id/96/200/200" },
-                  { category: "Laptops", image: "https://picsum.photos/id/0/200/200" },
-                  { category: "Smartwatch", image: "https://picsum.photos/id/175/200/200" },
+                  { name: "Headset",slug: "headset", image: "https://picsum.photos/id/96/200/200" },
+                  { name: "Laptops",slug: "laptops", image: "https://picsum.photos/id/0/200/200" },
+                  { name: "Smartwatch",slug: "smartwatch", image: "https://picsum.photos/id/175/200/200" },
                 ].map((item) => (
                   <Link
-                    key={item.category}
-                    to={`/category/${encodeURIComponent(item.category)}`}
+                    key={item.slug}
+                    to={`/category/${encodeURIComponent(item.slug)}`}
                     className="flex gap-4 group"
                   >
                     <div className="w-16 h-16 bg-slate-800 rounded-xl overflow-hidden flex-shrink-0 border border-slate-700">
                       <img
                         src={item.image}
-                        alt={item.category}
+                        alt={item.slug}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform"
                       />
                     </div>
                     <div className="flex flex-col justify-center">
                       <h4 className="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">
-                        {item.category}
+                        {item.name}
                       </h4>
                       <span className="text-[10px] text-slate-400 mt-1">
-                        {MOCK_POSTS.filter((p) => p.category === item.category).length} articles
+                        {MOCK_POSTS.filter((p) => p.category === item.slug).length} articles
                       </span>
                     </div>
                   </Link>
