@@ -151,48 +151,44 @@ const Home: React.FC = () => {
 
           {/* Sidebar */}
           <aside className="lg:w-1/3 space-y-12">
-            {/* Top Picks Sidebar Box */}
+            {/* Categories Sidebar Box */}
             <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden">
               <Award
                 className="absolute -top-4 -right-4 text-white/5"
                 size={140}
               />
               <h3 className="text-xl font-bold mb-6 relative z-10 flex items-center gap-2">
-                Best Sellers 2024
+                Browse Categories
               </h3>
-              <div className="space-y-6 relative z-10">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="flex gap-4 group cursor-pointer">
+              <div className="space-y-4 relative z-10">
+                {[
+                  { category: Category.AUDIO_DEVICES, image: "https://picsum.photos/id/96/200/200" },
+                  { category: Category.LAPTOP_PC, image: "https://picsum.photos/id/0/200/200" },
+                  { category: Category.SMARTWATCH, image: "https://picsum.photos/id/175/200/200" },
+                ].map((item) => (
+                  <Link
+                    key={item.category}
+                    to={`/category/${encodeURIComponent(item.category)}`}
+                    className="flex gap-4 group"
+                  >
                     <div className="w-16 h-16 bg-slate-800 rounded-xl overflow-hidden flex-shrink-0 border border-slate-700">
                       <img
-                        src={`https://picsum.photos/id/${100 + i}/200/200`}
-                        alt="Product"
+                        src={item.image}
+                        alt={item.category}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform"
                       />
                     </div>
                     <div className="flex flex-col justify-center">
-                      <span className="text-[10px] font-bold text-blue-400 uppercase">
-                        #0{i} Pick
-                      </span>
-                      <h4 className="font-bold text-sm text-white group-hover:text-blue-400 transition-colors line-clamp-1">
-                        Ultimate Workstation Pro {i}
+                      <h4 className="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">
+                        {item.category}
                       </h4>
-                      <div className="flex items-center gap-2 text-xs text-slate-500 mt-1">
-                        <span className="text-white font-bold">$1,299</span>
-                        <span className="flex items-center gap-0.5 text-yellow-500">
-                          <Star size={10} fill="currentColor" /> 4.9
-                        </span>
-                      </div>
+                      <span className="text-[10px] text-slate-400 mt-1">
+                        {MOCK_POSTS.filter((p) => p.category === item.category).length} articles
+                      </span>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
-              <Link
-                to="/buying-guides"
-                className="mt-8 block w-full bg-blue-600 text-center py-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors"
-              >
-                See Best Recommendations
-              </Link>
             </div>
 
             {/* Newsletter Side Box */}
