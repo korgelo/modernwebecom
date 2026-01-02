@@ -3,10 +3,17 @@ import { MOCK_POSTS, TRENDING_POSTS } from "../constants";
 import BlogCard from "../components/BlogCard";
 import { ArrowRight, Zap, TrendingUp, Award, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Category } from "../types";
 
 const Home: React.FC = () => {
   const featuredPost = MOCK_POSTS.find((p) => p.featured) || MOCK_POSTS[0];
-  const latestPosts = MOCK_POSTS.slice(0);
+  const latestPosts = MOCK_POSTS.slice(0, 6);
+
+  // Group posts by category with 6 posts per category
+  const postsByCategory = Object.values(Category).reduce((acc, category) => {
+    acc[category] = MOCK_POSTS.filter((post) => post.category === category).slice(0, 6);
+    return acc;
+  }, {} as Record<Category, typeof MOCK_POSTS>);
 
   return (
     <div className="pb-20">
@@ -113,16 +120,6 @@ const Home: React.FC = () => {
                 Latest Reviews{" "}
                 <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
               </h2>
-              <Link
-                to="/reviews"
-                className="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center gap-1 group"
-              >
-                View All{" "}
-                <ArrowRight
-                  size={16}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </Link>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -130,6 +127,35 @@ const Home: React.FC = () => {
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
+
+            {/* Posts by Category */}
+            {Object.entries(postsByCategory).map(([category, posts]) =>
+              posts.length > 0 && (
+                <div key={category} className="mt-16">
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
+                      {category}{" "}
+                      <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
+                    </h2>
+                    <Link
+                      to={`/category/${encodeURIComponent(category)}`}
+                      className="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center gap-1 group"
+                    >
+                      View All{" "}
+                      <ArrowRight
+                        size={16}
+                        className="group-hover:translate-x-1 transition-transform"
+                      />
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    {posts.map((post) => (
+                      <BlogCard key={post.id} post={post} />
+                    ))}
+                  </div>
+                </div>
+              )
+            )}
 
             <button className="w-full mt-12 py-4 border-2 border-slate-200 text-slate-500 font-bold rounded-2xl hover:bg-slate-50 hover:border-slate-300 transition-all uppercase tracking-widest text-xs">
               Load More Content
