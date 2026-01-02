@@ -10,7 +10,9 @@ const Home: React.FC = () => {
 
   // Group posts by category with 6 posts per category
   const postsByCategory = Object.values(Category).reduce((acc, category) => {
-    acc[category] = MOCK_POSTS.filter((post) => post.category === category).slice(0, 6);
+    acc[category] = MOCK_POSTS.filter(
+      (post) => post.category === category
+    ).slice(0, 6);
     return acc;
   }, {} as Record<Category, typeof MOCK_POSTS>);
 
@@ -115,32 +117,33 @@ const Home: React.FC = () => {
           {/* Latest Feed */}
           <main className="lg:w-2/3">
             {/* Posts by Category */}
-            {Object.entries(postsByCategory).map(([category, posts]) =>
-              posts.length > 0 && (
-                <div key={category}>
-                  <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
-                      {category}{" "}
-                      <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
-                    </h2>
-                    <Link
-                      to={`/category/${encodeURIComponent(category)}`}
-                      className="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center gap-1 group"
-                    >
-                      View All{" "}
-                      <ArrowRight
-                        size={16}
-                        className="group-hover:translate-x-1 transition-transform"
-                      />
-                    </Link>
+            {Object.entries(postsByCategory).map(
+              ([category, posts]) =>
+                posts.length > 0 && (
+                  <div key={category}>
+                    <div className="flex items-center justify-between mb-8">
+                      <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
+                        {category}{" "}
+                        <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
+                      </h2>
+                      <Link
+                        to={`/category/${encodeURIComponent(category)}`}
+                        className="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center gap-1 group"
+                      >
+                        View All{" "}
+                        <ArrowRight
+                          size={16}
+                          className="group-hover:translate-x-1 transition-transform"
+                        />
+                      </Link>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                      {posts.map((post) => (
+                        <BlogCard key={post.id} post={post} />
+                      ))}
+                    </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    {posts.map((post) => (
-                      <BlogCard key={post.id} post={post} />
-                    ))}
-                  </div>
-                </div>
-              )
+                )
             )}
 
             <button className="w-full mt-12 py-4 border-2 border-slate-200 text-slate-500 font-bold rounded-2xl hover:bg-slate-50 hover:border-slate-300 transition-all uppercase tracking-widest text-xs">
@@ -161,9 +164,24 @@ const Home: React.FC = () => {
               </h3>
               <div className="space-y-4 relative z-10">
                 {[
-                  { name: "Headset",slug: "headset", image: "https://picsum.photos/id/96/200/200" },
-                  { name: "Laptops",slug: "laptops", image: "https://picsum.photos/id/0/200/200" },
-                  { name: "Smartwatch",slug: "smartwatch", image: "https://picsum.photos/id/175/200/200" },
+                  {
+                    name: "Headset",
+                    slug: "headset",
+                    image:
+                      "../../assets/images/audio/Beats-Solo-4-Wireless-Headphones.jpg",
+                  },
+                  {
+                    name: "Laptops",
+                    slug: "laptops",
+                    image:
+                      "../../assets/images/pc/lenovo-slim-3i-chromebook-14-review.jpg",
+                  },
+                  {
+                    name: "Smartwatch",
+                    slug: "smartwatch",
+                    image:
+                      "../../assets/images/smartwatch/samsung-galaxy-watch-7-40mm-review.jpg",
+                  },
                 ].map((item) => (
                   <Link
                     key={item.slug}
@@ -182,7 +200,11 @@ const Home: React.FC = () => {
                         {item.name}
                       </h4>
                       <span className="text-[10px] text-slate-400 mt-1">
-                        {MOCK_POSTS.filter((p) => p.category === item.slug).length} articles
+                        {
+                          MOCK_POSTS.filter((p) => p.category === item.slug)
+                            .length
+                        }{" "}
+                        articles
                       </span>
                     </div>
                   </Link>
