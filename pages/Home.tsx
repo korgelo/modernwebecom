@@ -115,19 +115,6 @@ const Home: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Latest Feed */}
           <main className="lg:w-2/3">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
-                Latest Reviews{" "}
-                <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {latestPosts.map((post) => (
-                <BlogCard key={post.id} post={post} />
-              ))}
-            </div>
-
             {/* Posts by Category */}
             {Object.entries(postsByCategory).map(([category, posts]) =>
               posts.length > 0 && (
