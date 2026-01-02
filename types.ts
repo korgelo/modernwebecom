@@ -1,11 +1,7 @@
 export enum Category {
-  LAPTOP_PC = "Laptop & PC Reviews",
-  SMARTWATCH = "Smartwatch",
-  AUDIO_DEVICES = "Audio Devices",
-  SMART_HOME = "Smart Home & Electronics",
-  BUYING_GUIDES = "Buying Guides",
-  COMPARISONS = "Comparisons",
-  HOW_TO = "How-To Guides",
+  LAPTOP_PC = "laptop",
+  SMARTWATCH = "smartwatch",
+  AUDIO_DEVICES = "headset",
 }
 
 export interface ProductSpec {

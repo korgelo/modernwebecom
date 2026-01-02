@@ -7,7 +7,6 @@ import { Category } from "../types";
 
 const Home: React.FC = () => {
   const featuredPost = MOCK_POSTS.find((p) => p.featured) || MOCK_POSTS[0];
-  const latestPosts = MOCK_POSTS.slice(0, 6);
 
   // Group posts by category with 6 posts per category
   const postsByCategory = Object.values(Category).reduce((acc, category) => {
