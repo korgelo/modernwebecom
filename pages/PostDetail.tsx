@@ -188,7 +188,7 @@ const PostDetail: React.FC = () => {
                   {post.category}
                 </h3>
                 <div className="space-y-6">
-                  {MOCK_POSTS.filter((p) => p.id !== post.id).map((p) => (
+                  {MOCK_POSTS.filter((p) => p.id !== post.id && p.category === post.category).slice(0, 10).map((p) => (
                     <Link
                       key={p.id}
                       to={`/post/${p.slug}`}
