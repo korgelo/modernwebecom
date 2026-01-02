@@ -118,7 +118,7 @@ const Home: React.FC = () => {
             {/* Posts by Category */}
             {Object.entries(postsByCategory).map(([category, posts]) =>
               posts.length > 0 && (
-                <div key={category} className="mt-16">
+                <div key={category}>
                   <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
                       {category}{" "}
@@ -152,7 +152,7 @@ const Home: React.FC = () => {
           {/* Sidebar */}
           <aside className="lg:w-1/3 space-y-12">
             {/* Categories Sidebar Box */}
-            <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden">
+            <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden mt-16">
               <Award
                 className="absolute -top-4 -right-4 text-white/5"
                 size={140}
