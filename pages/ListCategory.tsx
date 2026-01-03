@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { MOCK_POSTS } from "../constants";
 import BlogCard from "../components/BlogCard";
@@ -13,9 +13,23 @@ const slugToCategoryMap: Record<string, Category> = {
   smartwatch: Category.SMARTWATCH,
 };
 
+// Map slugs to human-friendly names
+const slugToDisplayName: Record<string, string> = {
+  headset: "Headset",
+  laptops: "Laptops",
+  smartwatch: "Smartwatch",
+};
+
 const ListCategory: React.FC = () => {
   const { cat } = useParams<{ cat: string }>();
+  // 🔽 Scroll to top on category change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [cat]);
   const category = cat ? slugToCategoryMap[cat] : undefined;
+  const displayName = cat
+    ? slugToDisplayName[cat] ?? "All Reviews"
+    : "All Reviews";
   const filteredPosts = category
     ? MOCK_POSTS.filter((post) => post.category === category)
     : MOCK_POSTS;
@@ -28,7 +42,7 @@ const ListCategory: React.FC = () => {
           <main>
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
-                {category || "All Reviews"}{" "}
+                {displayName}{" "}
                 <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
               </h2>
               <Link

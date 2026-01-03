@@ -5,10 +5,31 @@ import { ArrowRight, Zap, TrendingUp, Award, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Category } from "../types";
 
+const CATEGORY_META: Record<Category, { name: string; image: string }> = {
+  [Category.AUDIO_DEVICES]: {
+    name: "Headset",
+    image: "../../assets/images/audio/Beats-Solo-4-Wireless-Headphones.jpg",
+  },
+  [Category.LAPTOP_PC]: {
+    name: "Laptops",
+    image: "../../assets/images/pc/lenovo-slim-3i-chromebook-14-review.jpg",
+  },
+  [Category.SMARTWATCH]: {
+    name: "Smartwatch",
+    image:
+      "../../assets/images/smartwatch/samsung-galaxy-watch-7-40mm-review.jpg",
+  },
+};
+
+const CATEGORIES = Object.values(Category).map((slug) => ({
+  slug,
+  name: CATEGORY_META[slug].name,
+  image: CATEGORY_META[slug].image,
+}));
+
 const Home: React.FC = () => {
   const featuredPost = MOCK_POSTS.find((p) => p.featured) || MOCK_POSTS[0];
 
-  // Group posts by category with 6 posts per category
   const postsByCategory = Object.values(Category).reduce((acc, category) => {
     acc[category] = MOCK_POSTS.filter(
       (post) => post.category === category
@@ -112,7 +133,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Main Content Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Latest Feed */}
           <main className="lg:w-2/3">
@@ -121,9 +142,9 @@ const Home: React.FC = () => {
               ([category, posts]) =>
                 posts.length > 0 && (
                   <div key={category}>
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center justify-between my-4">
                       <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
-                        {category}{" "}
+                        {CATEGORY_META[category as Category].name}{" "}
                         <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
                       </h2>
                       <Link
@@ -162,27 +183,9 @@ const Home: React.FC = () => {
               <h3 className="text-xl font-bold mb-6 relative z-10 flex items-center gap-2">
                 Browse Categories
               </h3>
+              {/* Replace sidebar hardcoded array with CATEGORIES */}
               <div className="space-y-4 relative z-10">
-                {[
-                  {
-                    name: "Headset",
-                    slug: "headset",
-                    image:
-                      "../../assets/images/audio/Beats-Solo-4-Wireless-Headphones.jpg",
-                  },
-                  {
-                    name: "Laptops",
-                    slug: "laptops",
-                    image:
-                      "../../assets/images/pc/lenovo-slim-3i-chromebook-14-review.jpg",
-                  },
-                  {
-                    name: "Smartwatch",
-                    slug: "smartwatch",
-                    image:
-                      "../../assets/images/smartwatch/samsung-galaxy-watch-7-40mm-review.jpg",
-                  },
-                ].map((item) => (
+                {CATEGORIES.map((item) => (
                   <Link
                     key={item.slug}
                     to={`/category/${encodeURIComponent(item.slug)}`}

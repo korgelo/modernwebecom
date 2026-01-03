@@ -21,7 +21,7 @@ const PostDetail: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (post) {
-      document.title = `${post.title} | TechVantage US`;
+      document.title = `${post.title} | SuyoohTech Blog`;
     }
   }, [post]);
 
