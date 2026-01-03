@@ -134,7 +134,6 @@ export const MOCK_POSTS: Post[] = [
       "Looking for the perfect balance of protection and portability? Our review of the Ljusmicker Silicone Case for Bose QuietComfort Ultra Earbuds explores why this affordable accessory is a top choice for audiophiles.",
     category: Category.AUDIO_DEVICES,
     date: "December 28, 2025",
-    featured: true,
     featuredImage:
       "../../assets/images/audio/Ljusmicker-Protective-Generation-Accessories.jpg",
     content:
@@ -1748,6 +1747,7 @@ export const MOCK_POSTS: Post[] = [
       "Discover the Apple Watch Series 10. Featuring a thinner design, a larger OLED display, and advanced health sensors like sleep apnea notifications, it's the ultimate smartwatch upgrade.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
+    featured: true,
     featuredImage:
       "../../assets/images/smartwatch/apple-watch-series-10-review.jpg",
     content:
