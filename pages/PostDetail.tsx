@@ -6,12 +6,8 @@ import {
   Clock,
   Calendar,
   Share2,
-  Bookmark,
   MessageSquare,
   ChevronRight,
-  Facebook,
-  Twitter,
-  Link as LinkIcon,
 } from "lucide-react";
 
 const PostDetail: React.FC = () => {
@@ -77,26 +73,6 @@ const PostDetail: React.FC = () => {
                 className="w-full h-auto"
               />
             </div>
-
-            {/* Social Share Floating Left (Simulated) */}
-            <div className="flex lg:flex-col items-center gap-4 mb-8 lg:fixed lg:left-8 lg:top-1/3 z-10 lg:bg-white lg:p-4 lg:rounded-2xl lg:shadow-xl lg:border lg:border-slate-100">
-              <span className="text-[10px] font-bold text-slate-400 uppercase mb-2 hidden lg:block">
-                Share
-              </span>
-              <button className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors">
-                <Twitter size={20} />
-              </button>
-              <button className="p-3 bg-indigo-50 text-indigo-600 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors">
-                <Facebook size={20} />
-              </button>
-              <button className="p-3 bg-slate-50 text-slate-600 rounded-xl hover:bg-slate-600 hover:text-white transition-colors">
-                <LinkIcon size={20} />
-              </button>
-              <button className="p-3 bg-slate-50 text-slate-600 rounded-xl hover:bg-slate-600 hover:text-white transition-colors mt-4 hidden lg:block">
-                <Bookmark size={20} />
-              </button>
-            </div>
-
             <div className="prose prose-slate lg:prose-xl max-w-none">
               <p className="text-xl leading-relaxed text-slate-600 font-medium mb-8">
                 {post.excerpt}

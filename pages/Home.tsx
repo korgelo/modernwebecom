@@ -65,9 +65,11 @@ const Home: React.FC = () => {
                 >
                   Read Full Review
                 </Link>
-                <button className="bg-slate-800 text-white px-8 py-4 rounded-full font-bold text-sm border border-slate-700 hover:bg-slate-700 transition-colors">
-                  View Latest Deals
-                </button>
+                <Link to="/deal" className="hover:text-slate-300">
+                  <button className="bg-slate-800 text-white px-8 py-4 rounded-full font-bold text-sm border border-slate-700 hover:bg-slate-700 transition-colors">
+                    View Latest Deals
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="lg:w-1/2 relative">
