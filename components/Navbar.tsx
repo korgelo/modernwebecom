@@ -121,9 +121,11 @@ const Navbar: React.FC = () => {
             ))}
           </div>
           <div className="px-4 mt-4">
-            <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">
-              Join Newsletter
-            </button>
+            <Link to="/deal">
+              <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">
+                Search reviews
+              </button>
+            </Link>
           </div>
         </div>
       )}
