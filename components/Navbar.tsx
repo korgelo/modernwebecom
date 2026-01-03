@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Category } from "../types";
-import { SITE_NAME } from "../constants";
 import {
   Menu,
   X,
@@ -9,10 +7,6 @@ import {
   Monitor,
   Headset,
   Smartphone,
-  Home,
-  BookOpen,
-  Scaling,
-  Wrench,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -78,20 +72,13 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search size={16} className="text-slate-400" />
-              </div>
-              <input
-                type="text"
-                className="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-full leading-5 bg-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white sm:text-sm transition-all"
-                placeholder="Search reviews..."
-              />
-            </div>
-            <button className="bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm">
-              Newsletter
-            </button>
+          <div className="hidden md:flex items-center">
+            <Link to="/deal">
+              <button className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm">
+                <Search size={16} />
+                Search reviews
+              </button>
+            </Link>
           </div>
 
           <div className="flex items-center md:hidden">

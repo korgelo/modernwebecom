@@ -188,64 +188,58 @@ const PostDetail: React.FC = () => {
                   {post.category}
                 </h3>
                 <div className="space-y-6">
-                  {MOCK_POSTS.filter((p) => p.id !== post.id && p.category === post.category).slice(0, 10).map((p) => (
-                    <Link
-                      key={p.id}
-                      to={`/post/${p.slug}`}
-                      className="flex gap-4 group"
-                    >
-                      <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-100">
-                        <img
-                          src={p.featuredImage}
-                          alt={p.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
-                          {p.title}
-                        </h4>
-                        <span className="text-[10px] text-slate-400 font-bold uppercase mt-1 block">
-                          {p.date}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
+                  {MOCK_POSTS.filter(
+                    (p) => p.id !== post.id && p.category === post.category
+                  )
+                    .slice(0, 10)
+                    .map((p) => (
+                      <Link
+                        key={p.id}
+                        to={`/post/${p.slug}`}
+                        className="flex gap-4 group"
+                      >
+                        <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-100">
+                          <img
+                            src={p.featuredImage}
+                            alt={p.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                          />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
+                            {p.title}
+                          </h4>
+                          <span className="text-[10px] text-slate-400 font-bold uppercase mt-1 block">
+                            {p.date}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
                 </div>
               </div>
 
-              {/* FAQ Box */}
-              <div className="bg-slate-900 rounded-3xl p-8 text-white">
-                <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                  <MessageSquare size={18} className="text-blue-400" /> Quick
-                  FAQ
+              {/* DealFinder Side Box */}
+              <div className="bg-blue-50 rounded-3xl p-8 border border-blue-100">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">
+                  Tech Deal Finder
                 </h3>
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-sm font-bold text-blue-400 mb-2">
-                      Is it worth the upgrade?
-                    </h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      Only if you're coming from a model 2+ years old.
-                      Incremental yearly changes are minimal.
-                    </p>
-                  </div>
-                  <div className="h-px bg-slate-800"></div>
-                  <div>
-                    <h4 className="text-sm font-bold text-blue-400 mb-2">
-                      What is the warranty?
-                    </h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      In the US, standard 1-year limited warranty is included
-                      with optional extended plans.
-                    </p>
-                  </div>
-                </div>
+                <p className="text-slate-600 text-sm mb-6 leading-relaxed">
+                  Stay ahead of the curve. Get the most important tech updates
+                  by the help of Ai.
+                </p>
+                <Link to="/deal">
+                  <button className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg">
+                    Learn More
+                  </button>
+                </Link>
+                <p className="text-[10px] text-slate-400 text-center italic mt-2">
+                  Next-Gen Sourcing Intelligence
+                </p>
               </div>
 
               <div className="border border-blue-100 bg-blue-50/50 rounded-3xl p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <ShieldCheck className="text-blue-600" size={20} />
+                  <MessageSquare className="text-blue-600" size={20} />
                   <span className="text-sm font-bold text-slate-900">
                     Affiliate Link Info
                   </span>
@@ -261,29 +255,5 @@ const PostDetail: React.FC = () => {
     </div>
   );
 };
-
-const ShieldCheck = ({
-  className,
-  size,
-}: {
-  className?: string;
-  size?: number;
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size || 24}
-    height={size || 24}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-    <path d="m9 12 2 2 4-4" />
-  </svg>
-);
 
 export default PostDetail;

@@ -121,7 +121,7 @@ const Home: React.FC = () => {
             </span>
             {TRENDING_POSTS.map((cat) => (
               <Link
-                to={`/tag/${cat.slug}`}
+                to={`/`}
                 key={cat.slug}
                 className="whitespace-nowrap bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
               >
@@ -215,28 +215,23 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Newsletter Side Box */}
+            {/* DealFinder Side Box */}
             <div className="bg-blue-50 rounded-3xl p-8 border border-blue-100">
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Tech Insights Daily
+                Tech Deal Finder
               </h3>
               <p className="text-slate-600 text-sm mb-6 leading-relaxed">
-                Stay ahead of the curve. Get the most important tech updates
-                directly to your inbox.
+                Stay ahead of the curve. Get the most important tech updates by
+                the help of Ai.
               </p>
-              <form className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                />
+              <Link to="/deal">
                 <button className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg">
-                  Subscribe Now
+                  Learn More
                 </button>
-                <p className="text-[10px] text-slate-400 text-center italic mt-2">
-                  No spam. Unsubscribe anytime.
-                </p>
-              </form>
+              </Link>
+              <p className="text-[10px] text-slate-400 text-center italic mt-2">
+                Next-Gen Sourcing Intelligence
+              </p>
             </div>
 
             {/* Deal of the day */}
@@ -249,30 +244,32 @@ const Home: React.FC = () => {
               </div>
               <div className="aspect-square bg-slate-50 rounded-2xl mb-4 overflow-hidden">
                 <img
-                  src="https://picsum.photos/id/119/400/400"
+                  src="../../assets/images/suyoohdeal.jpg"
                   alt="Deal"
                   className="w-full h-full object-cover hover:scale-105 transition-transform"
                 />
               </div>
               <h4 className="font-bold text-slate-900 mb-2">
-                MacBook Air M3 (2024 Model)
+                Tech Deal Finder
               </h4>
               <p className="text-slate-500 text-xs mb-4 line-clamp-2">
-                The ultimate everyday laptop. Thin, light, and faster than ever
-                with the M3 chip.
+                Real-time market analysis that doesn't just find products—it
+                builds your entire supply chain report in seconds.
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
                   <span className="text-slate-400 text-xs line-through">
-                    $1,099
+                    Credit Card
                   </span>
                   <span className="text-xl font-black text-slate-900">
-                    $899
+                    FREE
                   </span>
                 </div>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-blue-700 transition-colors">
-                  Get Deal
-                </button>
+                <Link to="/deal">
+                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-blue-700 transition-colors">
+                    Get Deal
+                  </button>
+                </Link>
               </div>
             </div>
           </aside>

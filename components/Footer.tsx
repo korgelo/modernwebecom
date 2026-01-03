@@ -1,13 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Monitor,
-  Twitter,
-  Facebook,
-  Instagram,
-  Youtube,
-  Mail,
-} from "lucide-react";
+import { Monitor } from "lucide-react";
 import { SITE_NAME, AFFILIATE_DISCLAIMER } from "../constants";
 
 const Footer: React.FC = () => {
@@ -25,28 +18,9 @@ const Footer: React.FC = () => {
               </span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Empowering US consumers with honest, data-driven technology
-              reviews and expert buying advice since 2018. Your shortcut to
-              better gadget choices.
+              We streamline the Amazon shopping experience by surfacing only the
+              absolute highest-converting best-sellers.
             </p>
-            <div className="flex space-x-4">
-              <Twitter
-                className="hover:text-white cursor-pointer transition-colors"
-                size={20}
-              />
-              <Facebook
-                className="hover:text-white cursor-pointer transition-colors"
-                size={20}
-              />
-              <Instagram
-                className="hover:text-white cursor-pointer transition-colors"
-                size={20}
-              />
-              <Youtube
-                className="hover:text-white cursor-pointer transition-colors"
-                size={20}
-              />
-            </div>
           </div>
 
           <div>
@@ -54,69 +28,45 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <Link
-                  to="/category/laptops"
+                  to="https://amzn.to/4s4F5Ns"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  Laptop Reviews
+                  Electronic Storefront
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/category/phones"
+                  to="https://amzn.to/49rq4xT"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  Smartphone Guides
+                  Computer Storefront
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/category/smart-home"
+                  to="https://amzn.to/4jauoow"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  Smart Home Gear
+                  Lightning Deals
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/category/gaming"
+                  to="https://amzn.to/4pO7XIl"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  PC Gaming Hardware
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/category/deals"
-                  className="hover:text-blue-400 transition-colors"
-                >
-                  Daily Tech Deals
+                  Today`s Deals
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-6">Company</h3>
+            <h3 className="text-white font-bold mb-6">Compliance</h3>
             <ul className="space-y-4 text-sm">
               <li>
                 <Link
-                  to="/about"
-                  className="hover:text-blue-400 transition-colors"
-                >
-                  About TechVantage
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/editorial-standards"
-                  className="hover:text-blue-400 transition-colors"
-                >
-                  Editorial Standards
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/privacy"
+                  to="https://www.amazon.com/privacyprefs"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Privacy Policy
@@ -124,17 +74,30 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/terms"
+                  to="https://www.amazon.com/gp/help/customer/display.html"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  Terms of Service
+                  Terms of Use
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/affiliate-disclosure"
+                  to="https://www.amazon.com/hz/contact-us/foresight/hubgateway"
                   className="hover:text-blue-400 transition-colors"
                 >
+                  Contact Support
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="https://www.amazon.com/hz/contact-us/foresight/hubgateway"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Disclaimer
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="hover:text-blue-400 transition-colors">
                   Affiliate Disclosure
                 </Link>
               </li>
@@ -142,26 +105,13 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold mb-6">Newsletter</h3>
-            <p className="text-sm mb-4">
-              Get the best tech news and deals delivered weekly.
-            </p>
-            <form className="space-y-3">
-              <div className="relative">
-                <Mail
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
-                  size={16}
-                />
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="bg-slate-800 border-none rounded-lg w-full pl-10 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 text-white"
-                />
-              </div>
+            <h3 className="text-white font-bold mb-6">Tech Deal Finder</h3>
+            <p className="text-sm mb-4">Get the best tech updates and deals.</p>
+            <Link to="/deal" className="hover:text-slate-300">
               <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-sm font-bold transition-colors">
-                Subscribe Free
+                Learn More
               </button>
-            </form>
+            </Link>
           </div>
         </div>
 
@@ -173,10 +123,10 @@ const Footer: React.FC = () => {
               reserved. Designed for US Consumers.
             </p>
             <div className="flex gap-6">
-              <Link to="/sitemap" className="hover:text-slate-300">
+              <Link to="/" className="hover:text-slate-300">
                 Sitemap
               </Link>
-              <Link to="/contact" className="hover:text-slate-300">
+              <Link to="/" className="hover:text-slate-300">
                 Contact Us
               </Link>
             </div>

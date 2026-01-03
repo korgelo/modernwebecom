@@ -34,3 +34,66 @@ export interface Post {
   product?: Product;
   compareWith?: Product;
 }
+
+// DealFinder
+
+export interface Supplier {
+  name: string;
+  type: "Manufacturer" | "Wholesaler" | "Trading Company" | "Dropshipper";
+  location: string;
+  specialty: string;
+  estimatedQualityScore: number; // 1-100
+  url?: string;
+}
+
+export interface AmzProduct {
+  id: string;
+  name: string;
+  description: string;
+  targetPrice: string;
+  trendingReason: string;
+  category: string;
+  demandLevel: "Low" | "Medium" | "High" | "Explosive";
+  suppliers: Supplier[];
+  affiliateUrl?: string;
+}
+
+export interface MarketAnalysis {
+  niche: string;
+  overview: string;
+  keyTrends: string[];
+  competitiveLandscape: string;
+}
+
+export interface SearchResult {
+  analysis: MarketAnalysis;
+  products: AmzProduct[];
+  sources: Source[];
+}
+
+export interface Source {
+  title: string;
+  uri: string;
+}
+
+// Added to resolve import error in components/SupplierModal.tsx
+/**
+ * Detailed sourcing report for a specific product
+ */
+export interface SupplierReport {
+  content: string;
+  sources: Source[];
+}
+
+export enum AppView {
+  HOME = "HOME",
+  RESULTS = "RESULTS",
+  SAVED = "SAVED",
+}
+
+export interface SavedReport {
+  id: string;
+  niche: string;
+  timestamp: number;
+  data: SearchResult;
+}

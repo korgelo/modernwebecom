@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import PostDetail from "./pages/PostDetail";
 import ListCategory from "./pages/ListCategory";
+import DealFinder from "./pages/DealFinder";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
             <Route path="/post/:slug" element={<PostDetail />} />
             {/* Catch all for category pages (simulated) */}
             <Route path="/category/:cat" element={<ListCategory />} />
+            <Route path="/deal" element={<DealFinder />} />
           </Routes>
         </main>
         <Footer />
