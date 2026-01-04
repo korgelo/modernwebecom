@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MOCK_POSTS, TRENDING_POSTS } from "../constants";
 import BlogCard from "../components/BlogCard";
 import { ArrowRight, Zap, TrendingUp, Award, Star } from "lucide-react";
@@ -28,6 +28,17 @@ const CATEGORIES = Object.values(Category).map((slug) => ({
 }));
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    document.title = "SuyoohTech | Latest Gadget Reviews";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        "content",
+        "SuyoohTech Blog provides honest, data-driven electronics reviews, computer buying guides, and the latest gadget comparisons for American consumers."
+      );
+    }
+  }, []);
+
   const featuredPost = MOCK_POSTS.find((p) => p.featured) || MOCK_POSTS[0];
 
   const postsByCategory = Object.values(Category).reduce((acc, category) => {

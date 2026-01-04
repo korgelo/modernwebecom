@@ -17,7 +17,14 @@ const PostDetail: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (post) {
+      // Dynamic SEO Title
       document.title = `${post.title} | SuyoohTech Blog`;
+
+      // Dynamic SEO Meta Description
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute("content", post.excerpt);
+      }
     }
   }, [post]);
 
