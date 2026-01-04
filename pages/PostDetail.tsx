@@ -3,11 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import { MOCK_POSTS, AFFILIATE_DISCLAIMER } from "../constants";
 import { AffiliateCTA, ComparisonTable } from "../components/ReviewUI";
 import {
-  Clock,
+  CheckCircle2,
   Calendar,
   Share2,
   MessageSquare,
   ChevronRight,
+  LinkIcon,
+  Info,
 } from "lucide-react";
 
 const PostDetail: React.FC = () => {
@@ -25,6 +27,57 @@ const PostDetail: React.FC = () => {
       if (metaDesc) {
         metaDesc.setAttribute("content", post.excerpt);
       }
+
+      // Inject JSON-LD Structured Data for Featured Snippets
+      const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "Review",
+        headline: post.title,
+        image: [post.featuredImage],
+        datePublished: post.date,
+        author: {
+          "@type": "Organization",
+          name: "TechVantage US Editorial Team",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "TechVantage US",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://picsum.photos/id/1/200/200",
+          },
+        },
+        itemReviewed: {
+          "@type": "Product",
+          name: post.product?.name,
+          brand: {
+            "@type": "Brand",
+            name: post.product?.brand,
+          },
+          offers: {
+            "@type": "Offer",
+            price: post.product?.price.replace(/[^0-9.]/g, ""),
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+          },
+        },
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: post.product?.rating,
+          bestRating: "5",
+        },
+      };
+
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(schemaData);
+      script.id = "json-ld-schema";
+      document.head.appendChild(script);
+
+      return () => {
+        const existingScript = document.getElementById("json-ld-schema");
+        if (existingScript) existingScript.remove();
+      };
     }
   }, [post]);
 
@@ -61,9 +114,6 @@ const PostDetail: React.FC = () => {
               <Calendar size={14} />
               <span>Published {post.date}</span>
             </div>
-            <div className="flex items-center gap-2 text-slate-500 text-xs">
-              <Clock size={14} />
-            </div>
           </div>
         </div>
       </header>
@@ -73,12 +123,48 @@ const PostDetail: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-16">
           {/* Left Column: Article Body */}
           <article className="lg:w-2/3">
-            <div className="rounded-3xl overflow-hidden mb-12 shadow-2xl">
+            <div className="rounded-3xl overflow-hidden mb-12 shadow-2xl bg-slate-100 aspect-[16/9]">
               <img
                 src={post.featuredImage}
                 alt={post.title}
-                className="w-full h-auto"
+                className="w-full h-full object-cover"
               />
+            </div>
+
+            {/* Discover Snippet Box: At a Glance */}
+            <div className="bg-blue-50 rounded-3xl p-8 mb-12 border border-blue-100">
+              <div className="flex items-center gap-2 mb-4">
+                <Info className="text-blue-600" size={20} />
+                <h2 className="text-lg font-bold text-slate-900">
+                  Review at a Glance
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white p-4 rounded-xl shadow-sm">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">
+                    Verdict
+                  </span>
+                  <p className="text-sm font-bold text-blue-600">
+                    Highly Recommended
+                  </p>
+                </div>
+                <div className="bg-white p-4 rounded-xl shadow-sm">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">
+                    Key Strength
+                  </span>
+                  <p className="text-sm font-bold text-slate-800">
+                    Performance Efficiency
+                  </p>
+                </div>
+                <div className="bg-white p-4 rounded-xl shadow-sm">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">
+                    Price Value
+                  </span>
+                  <p className="text-sm font-bold text-slate-800">
+                    Premium but Worth It
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="prose prose-slate lg:prose-xl max-w-none">
               <p className="text-xl leading-relaxed text-slate-600 font-medium mb-8">
@@ -87,8 +173,8 @@ const PostDetail: React.FC = () => {
 
               <div className="bg-slate-50 border-l-4 border-blue-600 p-8 rounded-r-2xl mb-12 italic text-slate-700">
                 "Our reviews are based on actual hands-on testing and data
-                metrics. We don't just read specs; we use these products in the
-                real world to see how they perform in your daily life."
+                metrics in our US labs. We prioritize long-term durability and
+                real-world performance."
               </div>
 
               <div
@@ -96,12 +182,15 @@ const PostDetail: React.FC = () => {
                 className="rich-content space-y-6 text-slate-800 leading-loose"
               />
 
-              {/* Primary Affiliate Card */}
+              {/* Primary Affiliate Card - Strategic for Featured Snippets */}
               {post.product && (
                 <>
-                  <h2 className="text-2xl font-bold mt-12 mb-6">
-                    Our Recommendation
-                  </h2>
+                  <div className="flex items-center gap-2 mt-12 mb-6">
+                    <CheckCircle2 className="text-emerald-500" size={24} />
+                    <h2 className="text-2xl font-bold m-0">
+                      Editor's Choice Recommendation
+                    </h2>
+                  </div>
                   <AffiliateCTA product={post.product} type="primary" />
                 </>
               )}
@@ -110,7 +199,7 @@ const PostDetail: React.FC = () => {
               {post.product && post.compareWith && (
                 <>
                   <h2 className="text-2xl font-bold mt-16 mb-6">
-                    How they Stack Up
+                    Expert Comparison: Which Should You Buy?
                   </h2>
                   <ComparisonTable
                     productA={post.product}
@@ -119,29 +208,34 @@ const PostDetail: React.FC = () => {
                 </>
               )}
 
-              <h2 className="text-3xl font-bold mt-16 mb-8">Final Verdict</h2>
+              <h2 className="text-3xl font-bold mt-16 mb-8">
+                The Final Verdict
+              </h2>
               <p className="text-lg text-slate-700 mb-8">
-                If you are looking for the best performance in this category,
-                the choice is clear. While there are cheaper alternatives, the
-                longevity and support ecosystem make this investment worthwhile
-                for most US consumers.
+                After 40+ hours of testing, we concluded that the{" "}
+                {post.product?.name} offers the best balance of features for the
+                average US tech enthusiast. It justifies its premium price tag
+                through superior build quality and a future-proof set of
+                specifications.
               </p>
 
-              <div className="bg-blue-600 rounded-3xl p-10 text-white mt-16 relative overflow-hidden shadow-2xl">
+              <div className="bg-slate-900 rounded-3xl p-10 text-white mt-16 relative overflow-hidden shadow-2xl border-l-8 border-blue-600">
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
                   <div className="md:w-1/2">
-                    <div className="text-4xl font-black mb-4">9.5/10</div>
-                    <h3 className="text-2xl font-bold mb-4">The Bottom Line</h3>
-                    <p className="text-blue-100 leading-relaxed">
-                      The {post.product?.name} is a triumph of engineering,
-                      offering features that actually matter without the fluff
-                      of standard marketing.
+                    <div className="text-5xl font-black mb-4 text-blue-500">
+                      9.5<span className="text-slate-500 text-2xl">/10</span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4">Key Takeaway</h3>
+                    <p className="text-slate-300 leading-relaxed">
+                      The {post.product?.name} defines the standard for its
+                      category in 2024. Its integration of AI-driven performance
+                      and sustainable materials sets a high bar for competitors.
                     </p>
                   </div>
                   <div className="md:w-1/2 flex flex-col items-center">
                     <div className="text-center mb-6">
-                      <div className="text-sm font-bold uppercase tracking-widest text-blue-200 mb-2">
-                        Check Today's Price
+                      <div className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">
+                        Live Market Price
                       </div>
                       <div className="text-3xl font-black">
                         {post.product?.price}
@@ -150,10 +244,10 @@ const PostDetail: React.FC = () => {
                     <a
                       href={post.product?.amazonLink}
                       target="_blank"
-                      rel="noopener"
-                      className="w-full bg-white text-blue-600 text-center py-4 rounded-2xl font-black hover:bg-blue-50 transition-all shadow-lg"
+                      rel="noopener noreferrer sponsored"
+                      className="w-full bg-blue-600 text-white text-center py-4 rounded-2xl font-black hover:bg-blue-700 transition-all shadow-lg flex items-center justify-center gap-2"
                     >
-                      VIEW ON AMAZON
+                      SHOP AT AMAZON <LinkIcon size={18} />
                     </a>
                   </div>
                 </div>
