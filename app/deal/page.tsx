@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { SearchInput } from "@/components/SearchInput";
 import { ProductCard } from "@/components/ProductCard";
-import { generateIntegratedMarketReport } from "@/services/gemini";
+import { generateIntegratedMarketReport } from "@/services/geminiService";
 import { AppView, SearchResult, SavedReport } from "@/types";
 import {
   AlertCircle,
