@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 import { extractDataFromJson, extractSources } from "@/utils/helpers";
 
-export async function generateIntegratedMarketReport(req: Request) {
+export async function POST(req: Request) {
   try {
     const { niche } = await req.json();
 
