@@ -1,7 +1,9 @@
+"use client";
+
 import React from 'react';
 import { X, ExternalLink, Globe } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import { SupplierReport } from '../types';
+import { SupplierReport } from '@/types';
 
 interface SupplierModalProps {
   isOpen: boolean;

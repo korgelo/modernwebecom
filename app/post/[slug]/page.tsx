@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { MOCK_POSTS, AFFILIATE_DISCLAIMER } from "../constants";
-import { AffiliateCTA, ComparisonTable } from "../components/ReviewUI";
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import { MOCK_POSTS, AFFILIATE_DISCLAIMER } from "@/constants";
+import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
 import {
   CheckCircle2,
   Calendar,
@@ -12,8 +15,9 @@ import {
   Info,
 } from "lucide-react";
 
-const PostDetail: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
+export default function PostDetail() {
+  const params = useParams();
+  const slug = params.slug as string;
   const post = MOCK_POSTS.find((p) => p.slug === slug);
 
   useEffect(() => {
@@ -85,7 +89,7 @@ const PostDetail: React.FC = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
         <h1 className="text-2xl font-bold mb-4">Review Not Found</h1>
-        <Link to="/" className="text-blue-600 hover:underline">
+        <Link href="/" className="text-blue-600 hover:underline">
           Back to Home
         </Link>
       </div>
@@ -98,7 +102,7 @@ const PostDetail: React.FC = () => {
       <header className="bg-slate-50 border-b border-slate-200 pt-12 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">
-            <Link to="/" className="hover:text-blue-600">
+            <Link href="/" className="hover:text-blue-600">
               Home
             </Link>
             <ChevronRight size={12} />
@@ -172,9 +176,9 @@ const PostDetail: React.FC = () => {
               </p>
 
               <div className="bg-slate-50 border-l-4 border-blue-600 p-8 rounded-r-2xl mb-12 italic text-slate-700">
-                "Our reviews are based on actual hands-on testing and data
+                &quot;Our reviews are based on actual hands-on testing and data
                 metrics in our US labs. We prioritize long-term durability and
-                real-world performance."
+                real-world performance.&quot;
               </div>
 
               <div
@@ -188,7 +192,7 @@ const PostDetail: React.FC = () => {
                   <div className="flex items-center gap-2 mt-12 mb-6">
                     <CheckCircle2 className="text-emerald-500" size={24} />
                     <h2 className="text-2xl font-bold m-0">
-                      Editor's Choice Recommendation
+                      Editor&apos;s Choice Recommendation
                     </h2>
                   </div>
                   <AffiliateCTA product={post.product} type="primary" />
@@ -272,7 +276,7 @@ const PostDetail: React.FC = () => {
                     .map((p) => (
                       <Link
                         key={p.id}
-                        to={`/post/${p.slug}`}
+                        href={`/post/${p.slug}`}
                         className="flex gap-4 group"
                       >
                         <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-100">
@@ -304,7 +308,7 @@ const PostDetail: React.FC = () => {
                   Stay ahead of the curve. Get the most important tech updates
                   by the help of Ai.
                 </p>
-                <Link to="/deal">
+                <Link href="/deal">
                   <button className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg">
                     Learn More
                   </button>
@@ -331,6 +335,4 @@ const PostDetail: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default PostDetail;
+}

@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Monitor } from "lucide-react";
-import { SITE_NAME, AFFILIATE_DISCLAIMER } from "../constants";
+import { SITE_NAME, AFFILIATE_DISCLAIMER } from "@/constants";
 
 const Footer: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 border-b border-slate-800 pb-12">
           <div className="col-span-1 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6">
+            <Link href="/" className="flex items-center gap-2 mb-6">
               <div className="bg-blue-600 p-1 rounded">
                 <Monitor className="text-white" size={20} />
               </div>
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <Link
-                  to="https://amzn.to/4s4F5Ns"
+                  href="https://amzn.to/4s4F5Ns"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Electronic Storefront
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="https://amzn.to/49rq4xT"
+                  href="https://amzn.to/49rq4xT"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Computer Storefront
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="https://amzn.to/4jauoow"
+                  href="https://amzn.to/4jauoow"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Lightning Deals
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="https://amzn.to/4pO7XIl"
+                  href="https://amzn.to/4pO7XIl"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Today`s Deals
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <Link
-                  to="https://www.amazon.com/privacyprefs"
+                  href="https://www.amazon.com/privacyprefs"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Privacy Policy
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="https://www.amazon.com/gp/help/customer/display.html"
+                  href="https://www.amazon.com/gp/help/customer/display.html"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Terms of Use
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="https://www.amazon.com/hz/contact-us/foresight/hubgateway"
+                  href="https://www.amazon.com/hz/contact-us/foresight/hubgateway"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Contact Support
@@ -90,14 +90,14 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="https://www.amazon.com/hz/contact-us/foresight/hubgateway"
+                  href="https://www.amazon.com/hz/contact-us/foresight/hubgateway"
                   className="hover:text-blue-400 transition-colors"
                 >
                   Disclaimer
                 </Link>
               </li>
               <li>
-                <Link to="/" className="hover:text-blue-400 transition-colors">
+                <Link href="/" className="hover:text-blue-400 transition-colors">
                   Affiliate Disclosure
                 </Link>
               </li>
@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-white font-bold mb-6">Tech Deal Finder</h3>
             <p className="text-sm mb-4">Get the best tech updates and deals.</p>
-            <Link to="/deal" className="hover:text-slate-300">
+            <Link href="/deal" className="hover:text-slate-300">
               <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-sm font-bold transition-colors">
                 Learn More
               </button>
@@ -123,10 +123,10 @@ const Footer: React.FC = () => {
               reserved. Designed for US Consumers.
             </p>
             <div className="flex gap-6">
-              <Link to="/" className="hover:text-slate-300">
+              <Link href="/" className="hover:text-slate-300">
                 Sitemap
               </Link>
-              <Link to="/" className="hover:text-slate-300">
+              <Link href="/" className="hover:text-slate-300">
                 Contact Us
               </Link>
             </div>

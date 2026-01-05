@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { AmzProduct } from "@/types";
 import {
@@ -141,7 +143,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </span>
             </div>
             <span className="text-slate-600 italic leading-relaxed">
-              "{product.trendingReason}"
+              &quot;{product.trendingReason}&quot;
             </span>
           </div>
         </div>
@@ -160,7 +162,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <ExternalLink className="h-3 w-3 opacity-50" />
             </a>
             <p className="text-[9px] text-center text-slate-400 mt-2 font-medium uppercase tracking-tight">
-              Search Result for "{product.name}"
+              Search Result for &quot;{product.name}&quot;
             </p>
           </div>
         )}

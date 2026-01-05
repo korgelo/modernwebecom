@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
-import { SearchInput } from "../components/SearchInput";
-import { ProductCard } from "../components/ProductCard";
-import { generateIntegratedMarketReport } from "../services/gemini";
-import { AppView, SearchResult, SavedReport } from "../types";
+import { SearchInput } from "@/components/SearchInput";
+import { ProductCard } from "@/components/ProductCard";
+import { generateIntegratedMarketReport } from "@/services/gemini";
+import { AppView, SearchResult, SavedReport } from "@/types";
 import {
   AlertCircle,
   History,
@@ -58,7 +60,7 @@ export default function DealFinder() {
       setReport(result);
       saveReport(result, query);
       setView(AppView.RESULTS);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       setError(
         "Market intelligence failed to generate. This usually happens if the search grounding is restricted or the niche is too broad. Please try another specific niche."
@@ -112,7 +114,7 @@ export default function DealFinder() {
                 <span className="text-indigo-600">Identify the source.</span>
               </h2>
               <p className="text-xl text-slate-500 mb-10 leading-relaxed max-w-2xl mx-auto">
-                Real-time market analysis that doesn't just find products—it
+                Real-time market analysis that doesn&apos;t just find products—it
                 builds your entire supply chain report in seconds.
               </p>
             </div>

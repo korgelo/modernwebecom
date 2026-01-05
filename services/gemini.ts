@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
-import { SearchResult } from "../types";
-import { extractDataFromJson, extractSources } from "../utils/helpers";
+import { SearchResult } from "@/types";
+import { extractDataFromJson, extractSources } from "@/utils/helpers";
 
 export const generateIntegratedMarketReport = async (
   niche: string
