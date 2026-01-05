@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   Menu,
@@ -8,7 +10,7 @@ import {
   Headset,
   Smartphone,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +34,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0 flex items-center gap-2">
+            <Link href="/" className="flex-shrink-0 flex items-center gap-2">
               <div className="bg-blue-600 p-1.5 rounded-lg">
                 <Monitor className="text-white" size={24} />
               </div>
@@ -47,7 +49,7 @@ const Navbar: React.FC = () => {
               {categories.slice(0, 3).map((cat) => (
                 <Link
                   key={cat.name}
-                  to={`/category/${cat.slug}`}
+                  href={`/category/${cat.slug}`}
                   className="text-slate-600 hover:text-blue-600 inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors"
                 >
                   {cat.name}
@@ -61,7 +63,7 @@ const Navbar: React.FC = () => {
                   {categories.slice(3).map((cat) => (
                     <Link
                       key={cat.name}
-                      to={`/category/${cat.slug}`}
+                      href={`/category/${cat.slug}`}
                       className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600"
                     >
                       {cat.name}
@@ -73,7 +75,7 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden md:flex items-center">
-            <Link to="/deal">
+            <Link href="/deal">
               <button className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm">
                 <Search size={16} />
                 Search reviews
@@ -99,7 +101,7 @@ const Navbar: React.FC = () => {
             {categories.map((cat) => (
               <Link
                 key={cat.name}
-                to={`/category/${cat.slug}`}
+                href={`/category/${cat.slug}`}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50"
               >
@@ -109,7 +111,7 @@ const Navbar: React.FC = () => {
             ))}
           </div>
           <div className="px-4 mt-4">
-            <Link to="/deal">
+            <Link href="/deal">
               <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">
                 Search reviews
               </button>

@@ -1,38 +1,49 @@
+"use client";
+
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { MOCK_POSTS } from "../constants";
-import BlogCard from "../components/BlogCard";
-import { Category } from "../types";
-import { ArrowRight, Home } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import { MOCK_POSTS } from "@/constants";
+import BlogCard from "@/components/BlogCard";
+import { Category } from "@/types";
+import { ArrowRight } from "lucide-react";
 
 // Map slugs to Category enum values
 const slugToCategoryMap: Record<string, Category> = {
-  headset: Category.AUDIO_DEVICES,
-  laptops: Category.LAPTOP_PC,
+  "audio-devices": Category.AUDIO_DEVICES,
+  "laptop-pc": Category.LAPTOP_PC,
   smartwatch: Category.SMARTWATCH,
 };
 
 // Map slugs to human-friendly names
 const slugToDisplayName: Record<string, string> = {
-  headset: "Headset",
-  laptops: "Laptops",
+  "audio-devices": "Headset",
+  "laptop-pc": "Laptops",
   smartwatch: "Smartwatch",
 };
 
-const ListCategory: React.FC = () => {
-  const { cat } = useParams<{ cat: string }>();
-  // 🔽 Scroll to top on category change
+export default function ListCategory() {
+  const params = useParams();
+  const cat = params.cat as string;
+
+  // Scroll to top on category change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [cat]);
-  const category = cat ? slugToCategoryMap[cat] : undefined;
+
+  // Try to match by slug map first, then by direct category value
+  const category = cat
+    ? slugToCategoryMap[cat] || (Object.values(Category).includes(cat as Category) ? cat as Category : undefined)
+    : undefined;
+
   const displayName = cat
-    ? slugToDisplayName[cat] ?? "All Reviews"
+    ? slugToDisplayName[cat] ?? (category ? cat : "All Reviews")
     : "All Reviews";
+
   const filteredPosts = category
     ? MOCK_POSTS.filter((post) => post.category === category)
     : MOCK_POSTS;
+
   return (
     <div className="pb-20">
       {/* Main Content Grid */}
@@ -46,7 +57,7 @@ const ListCategory: React.FC = () => {
                 <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
               </h2>
               <Link
-                to="/"
+                href="/"
                 className="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center gap-1 group"
               >
                 Back to Home{" "}
@@ -71,6 +82,4 @@ const ListCategory: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default ListCategory;
+}

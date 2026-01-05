@@ -1,23 +1,24 @@
+"use client";
+
 import React, { useEffect } from "react";
-import { MOCK_POSTS, TRENDING_POSTS } from "../constants";
-import BlogCard from "../components/BlogCard";
-import { ArrowRight, Zap, TrendingUp, Award, Star } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Category } from "../types";
+import { MOCK_POSTS, TRENDING_POSTS } from "@/constants";
+import BlogCard from "@/components/BlogCard";
+import { ArrowRight, Zap, TrendingUp, Award } from "lucide-react";
+import Link from "next/link";
+import { Category } from "@/types";
 
 const CATEGORY_META: Record<Category, { name: string; image: string }> = {
   [Category.AUDIO_DEVICES]: {
     name: "Headset",
-    image: "../../assets/images/audio/Beats-Solo-4-Wireless-Headphones.jpg",
+    image: "/assets/images/audio/Beats-Solo-4-Wireless-Headphones.jpg",
   },
   [Category.LAPTOP_PC]: {
     name: "Laptops",
-    image: "../../assets/images/pc/lenovo-slim-3i-chromebook-14-review.jpg",
+    image: "/assets/images/pc/lenovo-slim-3i-chromebook-14-review.jpg",
   },
   [Category.SMARTWATCH]: {
     name: "Smartwatch",
-    image:
-      "../../assets/images/smartwatch/samsung-galaxy-watch-7-40mm-review.jpg",
+    image: "/assets/images/smartwatch/samsung-galaxy-watch-7-40mm-review.jpg",
   },
 };
 
@@ -27,7 +28,7 @@ const CATEGORIES = Object.values(Category).map((slug) => ({
   image: CATEGORY_META[slug].image,
 }));
 
-const Home: React.FC = () => {
+export default function Home() {
   useEffect(() => {
     document.title = "SuyoohTech | Latest Gadget Reviews";
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -71,12 +72,12 @@ const Home: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  to={`/post/${featuredPost.slug}`}
+                  href={`/post/${featuredPost.slug}`}
                   className="bg-white text-slate-900 px-8 py-4 rounded-full font-extrabold text-sm hover:bg-blue-50 transition-colors shadow-lg"
                 >
                   Read Full Review
                 </Link>
-                <Link to="/deal" className="hover:text-slate-300">
+                <Link href="/deal" className="hover:text-slate-300">
                   <button className="bg-slate-800 text-white px-8 py-4 rounded-full font-bold text-sm border border-slate-700 hover:bg-slate-700 transition-colors">
                     View Latest Deals
                   </button>
@@ -98,7 +99,7 @@ const Home: React.FC = () => {
                     Editor Score
                   </span>
                   <span className="text-lg font-black text-slate-900">
-                    {featuredPost.product.rating}
+                    {featuredPost.product?.rating}
                   </span>
                 </div>
                 <div className="w-px h-8 bg-slate-100"></div>
@@ -107,7 +108,7 @@ const Home: React.FC = () => {
                     Brand
                   </span>
                   <span className="text-lg font-black text-slate-900">
-                    {featuredPost.product.brand}
+                    {featuredPost.product?.brand}
                   </span>
                 </div>
                 <div className="w-px h-8 bg-slate-100"></div>
@@ -116,7 +117,7 @@ const Home: React.FC = () => {
                     Price
                   </span>
                   <span className="text-lg font-black text-slate-900">
-                    {featuredPost.product.price}
+                    {featuredPost.product?.price}
                   </span>
                 </div>
               </div>
@@ -134,7 +135,7 @@ const Home: React.FC = () => {
             </span>
             {TRENDING_POSTS.map((cat) => (
               <Link
-                to={`/`}
+                href={`/`}
                 key={cat.slug}
                 className="whitespace-nowrap bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
               >
@@ -161,7 +162,7 @@ const Home: React.FC = () => {
                         <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
                       </h2>
                       <Link
-                        to={`/category/${encodeURIComponent(category)}`}
+                        href={`/category/${encodeURIComponent(category)}`}
                         className="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center gap-1 group"
                       >
                         View All{" "}
@@ -201,7 +202,7 @@ const Home: React.FC = () => {
                 {CATEGORIES.map((item) => (
                   <Link
                     key={item.slug}
-                    to={`/category/${encodeURIComponent(item.slug)}`}
+                    href={`/category/${encodeURIComponent(item.slug)}`}
                     className="flex gap-4 group"
                   >
                     <div className="w-16 h-16 bg-slate-800 rounded-xl overflow-hidden flex-shrink-0 border border-slate-700">
@@ -237,7 +238,7 @@ const Home: React.FC = () => {
                 Stay ahead of the curve. Get the most important tech updates by
                 the help of Ai.
               </p>
-              <Link to="/deal">
+              <Link href="/deal">
                 <button className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg">
                   Learn More
                 </button>
@@ -250,14 +251,14 @@ const Home: React.FC = () => {
             {/* Deal of the day */}
             <div className="border border-slate-200 rounded-3xl p-6 bg-white">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-bold text-slate-900">Today's Best Deal</h3>
+                <h3 className="font-bold text-slate-900">Today&apos;s Best Deal</h3>
                 <span className="text-[10px] font-black bg-rose-500 text-white px-2 py-0.5 rounded animate-pulse">
                   45% OFF
                 </span>
               </div>
               <div className="aspect-square bg-slate-50 rounded-2xl mb-4 overflow-hidden">
                 <img
-                  src="../../assets/images/suyoohdeal.jpg"
+                  src="/assets/images/suyoohdeal.jpg"
                   alt="Deal"
                   className="w-full h-full object-cover hover:scale-105 transition-transform"
                 />
@@ -266,7 +267,7 @@ const Home: React.FC = () => {
                 Tech Deal Finder
               </h4>
               <p className="text-slate-500 text-xs mb-4 line-clamp-2">
-                Real-time market analysis that doesn't just find products—it
+                Real-time market analysis that doesn&apos;t just find products—it
                 builds your entire supply chain report in seconds.
               </p>
               <div className="flex items-center justify-between">
@@ -278,7 +279,7 @@ const Home: React.FC = () => {
                     FREE
                   </span>
                 </div>
-                <Link to="/deal">
+                <Link href="/deal">
                   <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-blue-700 transition-colors">
                     Get Deal
                   </button>
@@ -290,6 +291,4 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}

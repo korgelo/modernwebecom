@@ -1,9 +1,9 @@
-import { Product, Source, MarketAnalysis } from "../types";
-import { generateAmazonSearchUrl } from "./affiliateManager";
+import { AmzProduct, Source, MarketAnalysis } from "@/types";
+import { generateAmazonSearchUrl } from "@/utils/affiliateManager";
 
 export const extractDataFromJson = (
   text: string
-): { products: Product[]; analysis: MarketAnalysis } | null => {
+): { products: AmzProduct[]; analysis: MarketAnalysis } | null => {
   try {
     const jsonBlockRegex = /```json\s*([\s\S]*?)\s*```/;
     const match = text.match(jsonBlockRegex);

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Product, ProductSpec } from '../types';
+import { Product, ProductSpec } from '@/types';
 import { ShoppingCart, Check, X, Star, ExternalLink, ShieldCheck } from 'lucide-react';
 
 export const AffiliateCTA: React.FC<{ product: Product, type?: 'primary' | 'secondary' }> = ({ product, type = 'primary' }) => {
