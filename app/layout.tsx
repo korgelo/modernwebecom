@@ -50,6 +50,12 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-NC9JL5T2');
           `}
         </Script>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9465532368889991"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-slate-50 text-slate-900`}>
         <noscript>
