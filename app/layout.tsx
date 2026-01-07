@@ -56,6 +56,19 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        {/* Google Ads / gtag */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-922060105"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-922060105');
+          `}
+        </Script>
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-slate-50 text-slate-900`}>
         <noscript>
