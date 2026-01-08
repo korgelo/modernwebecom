@@ -74,7 +74,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "beats-solo-4-wireless-on-ear-headphones-review",
     title:
       "Beats Solo 4 Wireless On-Ear Headphones Review: 50-Hour Battery and Spatial Audio",
-    excerpt:
+    description:
       "Read our in-depth Beats Solo 4 review. Featuring 50 hours of battery life, Personalized Spatial Audio, and lossless USB-C audio support for the ultimate listening experience.",
     category: Category.AUDIO_DEVICES,
     date: "December 28, 2025",
@@ -130,7 +130,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "ljusmicker-protective-case-bose-qc-ultra-review",
     title:
       "Ljusmicker Protective Case Review: The Best Budget Shield for Bose QC Ultra Earbuds",
-    excerpt:
+    description:
       "Looking for the perfect balance of protection and portability? Our review of the Ljusmicker Silicone Case for Bose QuietComfort Ultra Earbuds explores why this affordable accessory is a top choice for audiophiles.",
     category: Category.AUDIO_DEVICES,
     date: "December 28, 2025",
@@ -182,7 +182,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "jbl-tune-720bt-review-best-budget-wireless-headphones",
     title:
       "JBL Tune 720BT Review: The Best Budget Wireless Headphones with 76H Battery",
-    excerpt:
+    description:
       "Looking for incredible battery life and punchy bass without breaking the bank? Our JBL Tune 720BT review explores why these 76-hour headphones are a top pick for 2024.",
     category: Category.AUDIO_DEVICES,
     date: "December 30, 2025",
@@ -239,7 +239,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "apple-earpods-usb-c-review",
     title:
       "Apple EarPods (USB-C) Review: The Best $19 Investment for iPhone 16 Owners",
-    excerpt:
+    description:
       "Looking for a reliable, battery-free audio solution? Our Apple EarPods (USB-C) review explores why these iconic wired earbuds still beat wireless competitors for call quality and simplicity.",
     category: Category.AUDIO_DEVICES,
     date: "December 30, 2025",
@@ -294,7 +294,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "apple-airpods-max-usb-c-review",
     title:
       "Apple AirPods Max (USB-C) Review: The Ultimate Premium Audio Experience",
-    excerpt:
+    description:
       "Discover the 2024 Apple AirPods Max refresh featuring USB-C. Experience high-fidelity audio, pro-level noise cancellation, and seamless Apple integration in this detailed expert review.",
     category: Category.AUDIO_DEVICES,
     date: "December 30, 2025",
@@ -347,7 +347,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "tagry-x08-bluetooth-headphones-review",
     title:
       "TAGRY X08 Review: The Best Budget Wireless Earbuds with 60H Battery Life",
-    excerpt:
+    description:
       "Looking for affordable earbuds with premium features? Our TAGRY X08 review covers the 60-hour battery life, wireless charging, and IPX5 waterproof design that makes these a top Amazon pick.",
     category: Category.AUDIO_DEVICES,
     date: "December 28, 2025",
@@ -405,7 +405,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "lenovo-slim-3i-chromebook-14-review",
     title:
       'Lenovo Slim 3i Chromebook 14" Review: The Best Budget Laptop for Productivity',
-    excerpt:
+    description:
       "Looking for a fast, reliable, and affordable laptop? Our Lenovo Slim 3i Chromebook review breaks down why this i3-N305 powered machine is a game-changer for students and professionals.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -466,7 +466,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "dell-15-laptop-dc15250-review",
     title:
       "Dell 15 Laptop DC15250 Review: The Best 120Hz Productivity Laptop for 2025",
-    excerpt:
+    description:
       "Looking for an affordable workhorse? Our Dell 15 DC15250 review explores its 120Hz FHD display, Intel Core 3 performance, and why it's a top pick for students and professionals.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -521,7 +521,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "lenovo-tab-plus-review-ultimate-media-tablet-jbl-speakers",
     title:
       "Lenovo Tab Plus Review: The Ultimate Media Tablet with 8 JBL Speakers",
-    excerpt:
+    description:
       "Looking for the best tablet for movies and music? Our Lenovo Tab Plus review dives into its industry-leading 8-speaker JBL system, built-in kickstand, and crisp 2K display.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -582,7 +582,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "cupeisi-10-inch-android-tablet-review",
     title:
       "CUPEISI 10-Inch 2-in-1 Android Tablet Review: The Ultimate Budget Productivity Bundle",
-    excerpt:
+    description:
       "Discover the CUPEISI 10-inch Android tablet, a versatile 2-in-1 device featuring 12GB RAM, 128GB storage, and a full accessory kit including a keyboard and mouse. Perfect for students and remote work on a budget.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -646,7 +646,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "hp-14-dq0040nr-laptop-review",
     title:
       "HP 14-dq0040nr Laptop Review: The Best Budget Laptop for Students and Basic Work",
-    excerpt:
+    description:
       "Looking for a reliable, ultra-portable laptop that won't break the bank? Our HP 14-dq0040nr review explores why this Snowflake White machine is a top-seller for everyday productivity.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -707,7 +707,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "amazon-fire-hd-10-kids-tablet-2023-review",
     title:
       "Amazon Fire HD 10 Kids Tablet Review (2023): The Gold Standard for Children's Tablets",
-    excerpt:
+    description:
       "Is the Amazon Fire HD 10 Kids tablet the best choice for your child? Our review covers the 2023 model's 10.1-inch 1080p display, legendary 2-year worry-free guarantee, and robust parental controls.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -767,7 +767,7 @@ export const MOCK_POSTS: Post[] = [
     id: "B0DZD9S5GC",
     slug: "apple-2025-macbook-air-13-inch-review",
     title: "Apple 2025 MacBook Air 13-inch Review: The M4 Ultraportable King",
-    excerpt:
+    description:
       "The 2025 MacBook Air with the M4 chip is here. With 16GB of RAM now standard and a more aggressive price point, it's the ultimate laptop for students and pros alike.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -823,7 +823,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "samsung-galaxy-tab-a9-plus-review",
     title:
       "Samsung Galaxy Tab A9+ Review: The Best Budget Android Tablet in 2024?",
-    excerpt:
+    description:
       "Discover why the Samsung Galaxy Tab A9+ is the ultimate affordable tablet. With a 90Hz 11-inch display and quad speakers, it delivers premium features at a budget-friendly price.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -884,7 +884,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "apple-ipad-11th-gen-2024-review",
     title:
       "Apple iPad (11th Generation, 2024) Review: The Ultimate Budget Tablet",
-    excerpt:
+    description:
       "Apple's latest entry-level iPad (11th Gen) offers more storage and better performance than ever before. Discover why it remains the best value tablet for students and families in our expert review.",
     category: Category.LAPTOP_PC,
     date: "December 31, 2025",
@@ -941,7 +941,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "samsung-galaxy-watch-7-40mm-review",
     title:
       "Samsung Galaxy Watch 7 40mm Review: The Best AI-Powered Health Smartwatch for 2024",
-    excerpt:
+    description:
       "Samsung's Galaxy Watch 7 sets a new standard for Android wearables with its innovative AI wellness insights, a blazing-fast 3nm processor, and pinpoint accurate dual-frequency GPS.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -997,7 +997,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "maledan-floral-engraved-apple-watch-band-review",
     title:
       "Maledan Floral Engraved Apple Watch Band Review: The Ultimate Stylish Silicone Strap",
-    excerpt:
+    description:
       "Discover why the Maledan Floral Engraved Apple Watch Band is the top choice for users seeking a blend of elegance and durability. Our review explores its premium silicone build and stunning laser-etched design.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1053,7 +1053,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "snyeest-oura-ring-gen-3-heritage-protector-review",
     title:
       "Snyeest Oura Ring Gen 3 Heritage Protector Review: The Ultimate Ultra-Thin Shield",
-    excerpt:
+    description:
       "Looking for the best way to protect your Oura Ring Gen 3 Heritage from scratches? Our review of the Snyeest Ultra-Thin Protector reveals if this $9.99 silicone sleeve is worth it.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1109,7 +1109,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "fitbit-versa-4-fitness-smartwatch-review",
     title:
       "Fitbit Versa 4 Review: The Best Lightweight Fitness Smartwatch for Everyday Athletes",
-    excerpt:
+    description:
       "Looking for the perfect balance of fitness tracking and smart features? Our Fitbit Versa 4 review breaks down why this 6-day battery life powerhouse is a top choice for 2024.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1165,7 +1165,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "adepoy-silicone-apple-watch-band-review",
     title:
       "Adepoy Silicone Apple Watch Band Review: The Best Budget Sport Strap?",
-    excerpt:
+    description:
       "Looking for a durable, skin-friendly replacement for your iWatch? Our review covers why the Adepoy Silicone Sport Band is the best budget-friendly alternative for fitness enthusiasts.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1220,7 +1220,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "whoop-5-0-peak-membership-review",
     title:
       "WHOOP 5.0 Peak Membership Review: The Ultimate Wearable for Longevity",
-    excerpt:
+    description:
       "Optimize your recovery and slow your pace of aging with the WHOOP 5.0 Peak. This comprehensive fitness tracker includes a 12-month membership and the new 14-day battery life device.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1272,7 +1272,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "qundaxi-stainless-steel-link-bracelet-review",
     title:
       "QUNDAXI Stainless Steel Link Bracelet Review: Premium Look for Your Apple Watch Ultra",
-    excerpt:
+    description:
       "Upgrade your Apple Watch with the QUNDAXI Stainless Steel Link Bracelet. Discover why this durable, stylish, and affordable metal band is a top choice for Ultra and Series users.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1323,7 +1323,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "suwibo-braided-solo-loop-apple-watch-band-review",
     title:
       "SUWIBO Braided Solo Loop Review: The Best Adjustable Magnetic Apple Watch Band?",
-    excerpt:
+    description:
       "Upgrade your Apple Watch with the SUWIBO Braided Solo Loop. Featuring a unique magnetic clasp and stretchy nylon, it is the ultimate blend of comfort and security.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1375,7 +1375,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "ringconn-gen-2-air-sizing-kit-review",
     title:
       "RingConn Gen 2 Air Sizing Kit Review: The Essential First Step to Your Perfect Smart Ring",
-    excerpt:
+    description:
       "Don't guess your size. The RingConn Gen 2 Air Sizing Kit provides 9 precise plastic models to ensure your smart ring fits perfectly for accurate health tracking and all-day comfort.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1427,7 +1427,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "lerobo-stretchy-solo-loop-apple-watch-band-review",
     title:
       "Lerobo Stretchy Solo Loop Apple Watch Band Review: The Best Budget Comfort Strap",
-    excerpt:
+    description:
       "Looking for the most comfortable Apple Watch band? Our Lerobo Stretchy Solo Loop review explores why this waterproof, buckle-free silicone strap is a top-rated budget alternative.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1479,7 +1479,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "fitbit-inspire-3-review-budget-fitness-tracker",
     title:
       "Fitbit Inspire 3 Review: The Ultimate Budget Fitness Tracker for 2024",
-    excerpt:
+    description:
       "Looking for an affordable way to track your health? Our Fitbit Inspire 3 review explores its 10-day battery life, color screen, and advanced sleep tracking features.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1534,7 +1534,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "amband-m1-sport-series-rugged-case-review",
     title:
       "amBand M1 Sport Series Review: The Best Rugged Case for Apple Watch",
-    excerpt:
+    description:
       "Elevate your Apple Watch protection with the amBand M1 Sport Series. Read our expert review on this military-grade rugged case and band combo for active lifestyles.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1586,7 +1586,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "sunnywoo-breathable-outdoor-sport-band-review",
     title:
       "Sunnywoo Breathable Outdoor Sport Band Review: The Ultimate Rugged Apple Watch Strap",
-    excerpt:
+    description:
       "Looking for a durable, sweat-proof, and stylish strap for your Apple Watch? Read our in-depth review of the Sunnywoo Breathable Outdoor Sport Band, the perfect companion for your next adventure.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1637,7 +1637,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "aulola-magnetic-charging-cable-review",
     title:
       "AULOLA 3-in-1 Magnetic Charging Cable Review: The Ultimate Universal Power Solution",
-    excerpt:
+    description:
       "Say goodbye to damaged charging ports and tangled wires. Our AULOLA 3-in-1 Magnetic Charging Cable review explores why this 360-degree rotating charger is a must-have for multi-device users.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1687,7 +1687,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "temdan-3-in-2-multi-charging-cable-review",
     title:
       "Temdan 3-in-2 Multi Charging Cable Review: The Ultimate Travel Power Solution",
-    excerpt:
+    description:
       "Say goodbye to cable clutter with the Temdan 3-in-2 Multi Charging Cable. Featuring a magnetic iWatch charger and dual output for iPhone and USB-C devices, it is the perfect companion for your next vacation.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1743,7 +1743,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "apple-watch-series-10-review",
     title:
       "Apple Watch Series 10 Review: The Sleekest, Most Advanced Smartwatch Yet",
-    excerpt:
+    description:
       "Discover the Apple Watch Series 10. Featuring a thinner design, a larger OLED display, and advanced health sensors like sleep apnea notifications, it's the ultimate smartwatch upgrade.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1800,7 +1800,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "jzk-tempered-glass-screen-protector-galaxy-watch-review",
     title:
       "JZK Tempered Glass Screen Protector Review: Superior Guard for Galaxy Watch 5/4",
-    excerpt:
+    description:
       "Secure your Samsung Galaxy Watch 5 or 4 (40mm) with the JZK 2-pack tempered glass protector. Featuring 9H hardness and ultra-clear transparency for daily durability.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",
@@ -1851,7 +1851,7 @@ export const MOCK_POSTS: Post[] = [
     slug: "oura-ring-4-review-smart-health-sleep-tracker",
     title:
       "Oura Ring 4 Review: The Ultimate Smart Ring for Health and Sleep Tracking",
-    excerpt:
+    description:
       "Experience the next generation of wearable tech with the Oura Ring 4. Featuring revolutionary Smart Sensing technology and a sleek, all-titanium design, it offers the most accurate sleep and recovery insights on the market.",
     category: Category.SMARTWATCH,
     date: "January 1, 2026",

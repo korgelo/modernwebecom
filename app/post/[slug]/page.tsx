@@ -29,7 +29,7 @@ export default function PostDetail() {
       // Dynamic SEO Meta Description
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
-        metaDesc.setAttribute("content", post.excerpt);
+        metaDesc.setAttribute("content", post.description);
       }
 
       // Inject JSON-LD Structured Data for Featured Snippets
@@ -173,7 +173,7 @@ export default function PostDetail() {
             </div>
             <div className="prose prose-slate lg:prose-xl max-w-none">
               <p className="text-xl leading-relaxed text-slate-600 font-medium mb-8">
-                {post.excerpt}
+                {post.description}
               </p>
 
               <div className="bg-slate-50 border-l-4 border-blue-600 p-8 rounded-r-2xl mb-12 italic text-slate-700">

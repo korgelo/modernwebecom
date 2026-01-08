@@ -25,7 +25,7 @@ export interface Post {
   id: string;
   slug: string;
   title: string;
-  excerpt: string;
+  description: string;
   content: string;
   category: Category;
   date: string;
