@@ -32,7 +32,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, horizontal = false }) => {
             {post.title}
           </h3>
           <p className="text-slate-500 text-sm mb-4 line-clamp-2">
-            {post.excerpt}
+            {post.description}
           </p>
         </div>
       </Link>
@@ -71,7 +71,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, horizontal = false }) => {
           </h3>
         </Link>
         <p className="text-slate-500 text-sm mb-6 line-clamp-3">
-          {post.excerpt}
+          {post.description}
         </p>
         <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-end">
           <Link
