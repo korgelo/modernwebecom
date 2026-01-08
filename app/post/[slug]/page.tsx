@@ -52,7 +52,7 @@ export default function PostDetail() {
             url: "https://picsum.photos/id/1/200/200",
           },
         },
-        itemReviewed: {
+        review: {
           "@type": "Product",
           name: post.product?.name,
           image: [post.featuredImage],
@@ -67,7 +67,7 @@ export default function PostDetail() {
             availability: "https://schema.org/InStock",
           },
         },
-        reviewRating: {
+        aggregateRating: {
           "@type": "Rating",
           ratingValue: post.product?.rating,
           bestRating: "5",
