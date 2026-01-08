@@ -41,11 +41,11 @@ export default function PostDetail() {
         datePublished: post.date,
         author: {
           "@type": "Organization",
-          name: "TechVantage US Editorial Team",
+          name: "SuyoohTech Blog Editorial Team",
         },
         publisher: {
           "@type": "Organization",
-          name: "TechVantage US",
+          name: "SuyoohTech Blog",
           logo: {
             "@type": "ImageObject",
             url: "https://picsum.photos/id/1/200/200",
@@ -54,6 +54,7 @@ export default function PostDetail() {
         itemReviewed: {
           "@type": "Product",
           name: post.product?.name,
+          image: [post.featuredImage],
           brand: {
             "@type": "Brand",
             name: post.product?.brand,
