@@ -37,6 +37,7 @@ export default function PostDetail() {
         "@context": "https://schema.org",
         "@type": "Review",
         headline: post.title,
+        description: post.description,
         image: [post.featuredImage],
         datePublished: post.date,
         author: {
