@@ -33,46 +33,108 @@ export default function PostDetail() {
       }
 
       // Inject JSON-LD Structured Data for Featured Snippets
-      const schemaData = {
-        "@context": "https://schema.org",
-        "@type": "Review",
-        headline: post.title,
-        description: post.description,
-        image: [post.featuredImage],
-        datePublished: post.date,
-        author: {
-          "@type": "Organization",
-          name: "SuyoohTech Blog Editorial Team",
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  headline: post.title,
+  description: post.description,
+  image: [post.featuredImage],
+  datePublished: post.date,
+  author: {
+    "@type": "Organization",
+    name: "SuyoohTech Blog Editorial Team"
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "SuyoohTech Blog",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://picsum.photos/id/1/200/200"
+    }
+  },
+
+  reviewRating: {
+    "@type": "Rating",
+    ratingValue: post.product?.rating,
+    bestRating: "5"
+  },
+
+  itemReviewed: {
+    "@type": "Product",
+    name: post.product?.name,
+    description: post.description,
+    image: [post.featuredImage],
+
+    brand: {
+      "@type": "Brand",
+      name: post.product?.brand
+    },
+
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: post.product?.rating,
+    },
+
+    offers: {
+      "@type": "Offer",
+      url: post.product?.amazonLink,
+      price: post.product?.price?.replace(/[^0-9.]/g, ""),
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      priceValidUntil: "2026-12-31",
+
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0",
+          currency: "USD"
         },
-        publisher: {
-          "@type": "Organization",
-          name: "SuyoohTech Blog",
-          logo: {
-            "@type": "ImageObject",
-            url: "https://picsum.photos/id/1/200/200",
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "US"
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 2,
+            unitCode: "d"
           },
-        },
-        itemReviewed: {
-          "@type": "Product",
-          name: post.product?.name,
-          image: [post.featuredImage],
-          brand: {
-            "@type": "Brand",
-            name: post.product?.brand,
-          },
-          offers: {
-            "@type": "Offer",
-            price: post.product?.price.replace(/[^0-9.]/g, ""),
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-          },
-        },
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: post.product?.rating,
-          bestRating: "5",
-        },
-      };
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 3,
+            maxValue: 5,
+            unitCode: "d"
+          }
+        }
+      },
+
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 30,
+        returnMethod: "https://schema.org/ReturnByMail",
+        returnFees: "https://schema.org/FreeReturn"
+      }
+    },
+
+    review: {
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: post.product?.rating,
+        bestRating: "5"
+      },
+      author: {
+        "@type": "Organization",
+        name: "SuyoohTech Blog Editorial Team"
+      }
+    }
+  }
+};
+
 
       const script = document.createElement("script");
       script.type = "application/ld+json";
