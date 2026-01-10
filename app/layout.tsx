@@ -1,30 +1,36 @@
-import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
-import './globals.css'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import Script from 'next/script'
+import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Script from "next/script";
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-})
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+});
 
 export const metadata: Metadata = {
-  title: 'SuyoohTech | Latest Gadget Reviews',
-  description: 'Expert tech reviews, electronics buying guides, and latest gadget comparisons for United States consumers.',
-  robots: 'index, follow, max-image-preview:large',
-}
+  title: "SuyoohTech | Latest Gadget Reviews",
+  description:
+    "Expert tech reviews, electronics buying guides, and latest gadget comparisons for United States consumers.",
+  robots: "index, follow, max-image-preview:large",
+  icons: {
+    icon: "../public/assets/suyooh-logo.jpg",
+    shortcut: "../public/assets/suyooh-logo.jpg",
+    apple: "../public/assets/suyooh-logo.jpg",
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -70,23 +76,23 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-slate-50 text-slate-900`}>
+      <body
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-slate-50 text-slate-900`}
+      >
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NC9JL5T2"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
         <div className="min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
           <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </div>
       </body>
     </html>
-  )
+  );
 }
