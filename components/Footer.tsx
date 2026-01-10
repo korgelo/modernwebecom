@@ -97,7 +97,10 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/" className="hover:text-blue-400 transition-colors">
+                <Link
+                  href="/"
+                  className="hover:text-blue-400 transition-colors"
+                >
                   Affiliate Disclosure
                 </Link>
               </li>
@@ -109,7 +112,7 @@ const Footer: React.FC = () => {
             <p className="text-sm mb-4">Get the best tech updates and deals.</p>
             <Link href="/deal" className="hover:text-slate-300">
               <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-sm font-bold transition-colors">
-                Learn More
+                Find Best Deal
               </button>
             </Link>
           </div>
