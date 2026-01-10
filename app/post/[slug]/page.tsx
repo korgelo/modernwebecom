@@ -1,9 +1,7 @@
-"use client";
-
-import React, { useEffect } from "react";
-import { useParams } from "next/navigation";
+import React from "react";
+import { notFound } from "next/navigation";
 import Link from "next/link";
-import { MOCK_POSTS, AFFILIATE_DISCLAIMER } from "@/constants";
+import { getPostBySlug, getPostsByCategory, getAffiliateDisclaimer } from "@/lib/posts";
 import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
 import {
   CheckCircle2,
@@ -14,154 +12,146 @@ import {
   LinkIcon,
   Info,
 } from "lucide-react";
+import type { Metadata } from "next";
 
-export default function PostDetail() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const post = MOCK_POSTS.find((p) => p.slug === slug);
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (post) {
-      // Dynamic SEO Title
-      document.title = `${post.title} | SuyoohTech Blog`;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  
+  if (!post) {
+    return {
+      title: "Review Not Found | SuyoohTech Blog",
+    };
+  }
 
-      // Dynamic SEO Meta Description
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute("content", post.description);
-      }
+  return {
+    title: `${post.title} | SuyoohTech Blog`,
+    description: post.description,
+  };
+}
 
-      // Inject JSON-LD Structured Data for Featured Snippets
-      const schemaData = {
-        "@context": "https://schema.org",
-        "@type": "Review",
-        headline: post.title,
-        description: post.description,
-        image: [post.featuredImage],
-        datePublished: post.date,
-        author: {
-          "@type": "Organization",
-          name: "SuyoohTech Blog Editorial Team",
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "SuyoohTech Blog",
-          logo: {
-            "@type": "ImageObject",
-            url: "https://picsum.photos/id/1/200/200",
+function generateJsonLd(post: NonNullable<Awaited<ReturnType<typeof getPostBySlug>>>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    headline: post.title,
+    description: post.description,
+    image: [post.featuredImage],
+    datePublished: post.date,
+    author: {
+      "@type": "Organization",
+      name: "SuyoohTech Blog Editorial Team",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "SuyoohTech Blog",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://picsum.photos/id/1/200/200",
+      },
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: post.product?.rating,
+      bestRating: "5",
+    },
+    itemReviewed: {
+      "@type": "Product",
+      name: post.product?.name,
+      description: post.description,
+      image: [post.featuredImage],
+      brand: {
+        "@type": "Brand",
+        name: post.product?.brand,
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: post.product?.rating,
+      },
+      offers: {
+        "@type": "Offer",
+        url: post.product?.amazonLink,
+        price: post.product?.price?.replace(/[^0-9.]/g, ""),
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        priceValidUntil: "2026-12-31",
+        shippingDetails: {
+          "@type": "OfferShippingDetails",
+          shippingRate: {
+            "@type": "MonetaryAmount",
+            value: "0",
+            currency: "USD",
+          },
+          shippingDestination: {
+            "@type": "DefinedRegion",
+            addressCountry: "US",
+          },
+          deliveryTime: {
+            "@type": "ShippingDeliveryTime",
+            handlingTime: {
+              "@type": "QuantitativeValue",
+              minValue: 1,
+              maxValue: 2,
+              unitCode: "d",
+            },
+            transitTime: {
+              "@type": "QuantitativeValue",
+              minValue: 3,
+              maxValue: 5,
+              unitCode: "d",
+            },
           },
         },
-
+        hasMerchantReturnPolicy: {
+          "@type": "MerchantReturnPolicy",
+          returnPolicyCategory:
+            "https://schema.org/MerchantReturnFiniteReturnWindow",
+          merchantReturnDays: 30,
+          returnMethod: "https://schema.org/ReturnByMail",
+          returnFees: "https://schema.org/FreeReturn",
+        },
+      },
+      review: {
+        "@type": "Review",
         reviewRating: {
           "@type": "Rating",
           ratingValue: post.product?.rating,
           bestRating: "5",
         },
-
-        itemReviewed: {
-          "@type": "Product",
-          name: post.product?.name,
-          description: post.description,
-          image: [post.featuredImage],
-
-          brand: {
-            "@type": "Brand",
-            name: post.product?.brand,
-          },
-
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: post.product?.rating,
-          },
-
-          offers: {
-            "@type": "Offer",
-            url: post.product?.amazonLink,
-            price: post.product?.price?.replace(/[^0-9.]/g, ""),
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            priceValidUntil: "2026-12-31",
-
-            shippingDetails: {
-              "@type": "OfferShippingDetails",
-              shippingRate: {
-                "@type": "MonetaryAmount",
-                value: "0",
-                currency: "USD",
-              },
-              shippingDestination: {
-                "@type": "DefinedRegion",
-                addressCountry: "US",
-              },
-              deliveryTime: {
-                "@type": "ShippingDeliveryTime",
-                handlingTime: {
-                  "@type": "QuantitativeValue",
-                  minValue: 1,
-                  maxValue: 2,
-                  unitCode: "d",
-                },
-                transitTime: {
-                  "@type": "QuantitativeValue",
-                  minValue: 3,
-                  maxValue: 5,
-                  unitCode: "d",
-                },
-              },
-            },
-
-            hasMerchantReturnPolicy: {
-              "@type": "MerchantReturnPolicy",
-              returnPolicyCategory:
-                "https://schema.org/MerchantReturnFiniteReturnWindow",
-              merchantReturnDays: 30,
-              returnMethod: "https://schema.org/ReturnByMail",
-              returnFees: "https://schema.org/FreeReturn",
-            },
-          },
-
-          review: {
-            "@type": "Review",
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: post.product?.rating,
-              bestRating: "5",
-            },
-            author: {
-              "@type": "Organization",
-              name: "SuyoohTech Blog Editorial Team",
-            },
-          },
+        author: {
+          "@type": "Organization",
+          name: "SuyoohTech Blog Editorial Team",
         },
-      };
+      },
+    },
+  };
+}
 
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.text = JSON.stringify(schemaData);
-      script.id = "json-ld-schema";
-      document.head.appendChild(script);
-
-      return () => {
-        const existingScript = document.getElementById("json-ld-schema");
-        if (existingScript) existingScript.remove();
-      };
-    }
-  }, [post]);
+export default async function PostDetail({ params }: PageProps) {
+  const { slug } = await params;
+  const [post, affiliateDisclaimer] = await Promise.all([
+    getPostBySlug(slug),
+    getAffiliateDisclaimer(),
+  ]);
 
   if (!post) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4">
-        <h1 className="text-2xl font-bold mb-4">Review Not Found</h1>
-        <Link href="/" className="text-blue-600 hover:underline">
-          Back to Home
-        </Link>
-      </div>
-    );
+    notFound();
   }
 
-  return (
-    <div className="bg-white min-h-screen">
+  const relatedPosts = await getPostsByCategory(post.category);
+  const filteredRelatedPosts = relatedPosts.filter((p) => p.id !== post.id).slice(0, 10);
+  const jsonLd = generateJsonLd(post);
+
+    return (
+      <div className="bg-white min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       {/* Article Header */}
       <header className="bg-slate-50 border-b border-slate-200 pt-12 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -332,35 +322,31 @@ export default function PostDetail() {
                   <Share2 size={18} className="text-blue-600" /> More from{" "}
                   {post.category}
                 </h3>
-                <div className="space-y-6">
-                  {MOCK_POSTS.filter(
-                    (p) => p.id !== post.id && p.category === post.category
-                  )
-                    .slice(0, 10)
-                    .map((p) => (
-                      <Link
-                        key={p.id}
-                        href={`/post/${p.slug}`}
-                        className="flex gap-4 group"
-                      >
-                        <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-100">
-                          <img
-                            src={p.featuredImage}
-                            alt={p.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                          />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
-                            {p.title}
-                          </h4>
-                          <span className="text-[10px] text-slate-400 font-bold uppercase mt-1 block">
-                            {p.date}
-                          </span>
-                        </div>
-                      </Link>
-                    ))}
-                </div>
+                                <div className="space-y-6">
+                                  {filteredRelatedPosts.map((p) => (
+                                      <Link
+                                        key={p.id}
+                                        href={`/post/${p.slug}`}
+                                        className="flex gap-4 group"
+                                      >
+                                        <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-100">
+                                          <img
+                                            src={p.featuredImage}
+                                            alt={p.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                                          />
+                                        </div>
+                                        <div>
+                                          <h4 className="font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
+                                            {p.title}
+                                          </h4>
+                                          <span className="text-[10px] text-slate-400 font-bold uppercase mt-1 block">
+                                            {p.date}
+                                          </span>
+                                        </div>
+                                      </Link>
+                                    ))}
+                                </div>
               </div>
 
               {/* DealFinder Side Box */}
@@ -389,9 +375,9 @@ export default function PostDetail() {
                     Affiliate Link Info
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  {AFFILIATE_DISCLAIMER}
-                </p>
+                                <p className="text-xs text-slate-500 leading-relaxed">
+                                  {affiliateDisclaimer}
+                                </p>
               </div>
             </div>
           </aside>

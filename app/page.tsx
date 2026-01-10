@@ -1,11 +1,9 @@
-"use client";
-
-import React, { useEffect } from "react";
-import { MOCK_POSTS, TRENDING_POSTS } from "@/constants";
+import React from "react";
+import { getAllPosts, getTrendingPosts, getPostCountByCategory } from "@/lib/posts";
 import BlogCard from "@/components/BlogCard";
 import { ArrowRight, Zap, TrendingUp, Award } from "lucide-react";
 import Link from "next/link";
-import { Category } from "@/types";
+import { Category, Post } from "@/types";
 
 const CATEGORY_META: Record<Category, { name: string; image: string }> = {
   [Category.AUDIO_DEVICES]: {
@@ -28,26 +26,34 @@ const CATEGORIES = Object.values(Category).map((slug) => ({
   image: CATEGORY_META[slug].image,
 }));
 
-export default function Home() {
-  useEffect(() => {
-    document.title = "SuyoohTech | Latest Gadget Reviews";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        "content",
-        "SuyoohTech Blog provides honest, data-driven electronics reviews, computer buying guides, and the latest gadget comparisons for American consumers."
-      );
-    }
-  }, []);
+export const metadata = {
+  title: "SuyoohTech | Latest Gadget Reviews",
+  description:
+    "SuyoohTech Blog provides honest, data-driven electronics reviews, computer buying guides, and the latest gadget comparisons for American consumers.",
+};
 
-  const featuredPost = MOCK_POSTS.find((p) => p.featured) || MOCK_POSTS[0];
+export default async function Home() {
+  const [posts, trendingPosts] = await Promise.all([
+    getAllPosts(),
+    getTrendingPosts(),
+  ]);
 
-  const postsByCategory = Object.values(Category).reduce((acc, category) => {
-    acc[category] = MOCK_POSTS.filter(
-      (post) => post.category === category
-    ).slice(0, 6);
-    return acc;
-  }, {} as Record<Category, typeof MOCK_POSTS>);
+  const featuredPost = posts.find((p) => p.featured) || posts[0];
+
+  const postsByCategory = Object.values(Category).reduce(
+    (acc, category) => {
+      acc[category] = posts.filter((post) => post.category === category).slice(0, 6);
+      return acc;
+    },
+    {} as Record<Category, Post[]>
+  );
+
+  const categoryCounts = await Promise.all(
+    CATEGORIES.map(async (cat) => ({
+      ...cat,
+      count: await getPostCountByCategory(cat.slug),
+    }))
+  );
 
   return (
     <div className="pb-20">
@@ -133,15 +139,15 @@ export default function Home() {
             <span className="text-xs font-bold text-slate-400 uppercase flex items-center gap-2 flex-shrink-0">
               <TrendingUp size={16} className="text-rose-500" /> Trending Now:
             </span>
-            {TRENDING_POSTS.map((cat) => (
-              <Link
-                href={`/`}
-                key={cat.slug}
-                className="whitespace-nowrap bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
-              >
-                {cat.shortTitle}
-              </Link>
-            ))}
+                        {trendingPosts.map((cat) => (
+                          <Link
+                            href={`/`}
+                            key={cat.slug}
+                            className="whitespace-nowrap bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
+                          >
+                            {cat.shortTitle}
+                          </Link>
+                        ))}
           </div>
         </div>
       </section>
@@ -151,10 +157,10 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Latest Feed */}
           <main className="lg:w-2/3">
-            {/* Posts by Category */}
-            {Object.entries(postsByCategory).map(
-              ([category, posts]) =>
-                posts.length > 0 && (
+                        {/* Posts by Category */}
+                        {Object.entries(postsByCategory).map(
+                          ([category, categoryPosts]) =>
+                            categoryPosts.length > 0 && (
                   <div key={category}>
                     <div className="flex items-center justify-between my-4">
                       <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
@@ -172,11 +178,11 @@ export default function Home() {
                         />
                       </Link>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                      {posts.map((post) => (
-                        <BlogCard key={post.id} post={post} />
-                      ))}
-                    </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                          {categoryPosts.map((post) => (
+                                            <BlogCard key={post.id} post={post} />
+                                          ))}
+                                        </div>
                   </div>
                 )
             )}
@@ -197,36 +203,32 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-6 relative z-10 flex items-center gap-2">
                 Browse Categories
               </h3>
-              {/* Replace sidebar hardcoded array with CATEGORIES */}
-              <div className="space-y-4 relative z-10">
-                {CATEGORIES.map((item) => (
-                  <Link
-                    key={item.slug}
-                    href={`/category/${encodeURIComponent(item.slug)}`}
-                    className="flex gap-4 group"
-                  >
-                    <div className="w-16 h-16 bg-slate-800 rounded-xl overflow-hidden flex-shrink-0 border border-slate-700">
-                      <img
-                        src={item.image}
-                        alt={item.slug}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <h4 className="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">
-                        {item.name}
-                      </h4>
-                      <span className="text-[10px] text-slate-400 mt-1">
-                        {
-                          MOCK_POSTS.filter((p) => p.category === item.slug)
-                            .length
-                        }{" "}
-                        articles
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                            {/* Replace sidebar hardcoded array with CATEGORIES */}
+                            <div className="space-y-4 relative z-10">
+                              {categoryCounts.map((item) => (
+                                <Link
+                                  key={item.slug}
+                                  href={`/category/${encodeURIComponent(item.slug)}`}
+                                  className="flex gap-4 group"
+                                >
+                                  <div className="w-16 h-16 bg-slate-800 rounded-xl overflow-hidden flex-shrink-0 border border-slate-700">
+                                    <img
+                                      src={item.image}
+                                      alt={item.slug}
+                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                                    />
+                                  </div>
+                                  <div className="flex flex-col justify-center">
+                                    <h4 className="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">
+                                      {item.name}
+                                    </h4>
+                                    <span className="text-[10px] text-slate-400 mt-1">
+                                      {item.count} articles
+                                    </span>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
             </div>
 
             {/* DealFinder Side Box */}

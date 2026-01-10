@@ -1,37 +1,29 @@
-"use client";
-
-import React, { useEffect } from "react";
-import { useParams } from "next/navigation";
+import React from "react";
 import Link from "next/link";
-import { MOCK_POSTS } from "@/constants";
+import { getAllPosts, getPostsByCategory } from "@/lib/posts";
 import BlogCard from "@/components/BlogCard";
 import { Category } from "@/types";
 import { ArrowRight } from "lucide-react";
 
-// Map slugs to Category enum values
 const slugToCategoryMap: Record<string, Category> = {
   "audio-devices": Category.AUDIO_DEVICES,
   "laptop-pc": Category.LAPTOP_PC,
   smartwatch: Category.SMARTWATCH,
 };
 
-// Map slugs to human-friendly names
 const slugToDisplayName: Record<string, string> = {
   "audio-devices": "Headset",
   "laptop-pc": "Laptops",
   smartwatch: "Smartwatch",
 };
 
-export default function ListCategory() {
-  const params = useParams();
-  const cat = params.cat as string;
+interface PageProps {
+  params: Promise<{ cat: string }>;
+}
 
-  // Scroll to top on category change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [cat]);
+export default async function ListCategory({ params }: PageProps) {
+  const { cat } = await params;
 
-  // Try to match by slug map first, then by direct category value
   const category = cat
     ? slugToCategoryMap[cat] || (Object.values(Category).includes(cat as Category) ? cat as Category : undefined)
     : undefined;
@@ -41,8 +33,8 @@ export default function ListCategory() {
     : "All Reviews";
 
   const filteredPosts = category
-    ? MOCK_POSTS.filter((post) => post.category === category)
-    : MOCK_POSTS;
+    ? await getPostsByCategory(category)
+    : await getAllPosts();
 
   return (
     <div className="pb-20">
