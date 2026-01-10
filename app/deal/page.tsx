@@ -24,6 +24,7 @@ export default function DealFinder() {
   const [savedReports, setSavedReports] = useState<SavedReport[]>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const saved = localStorage.getItem("trendsource_saved");
     if (saved) {
       try {
@@ -32,10 +33,17 @@ export default function DealFinder() {
         console.error("Failed to load saved reports");
       }
     }
-  }, []);
+    // Dynamic SEO Title
+    document.title = `Find the Best Tech Deals on Suyooh – Laptops, Headsets & Gadgets`;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+    // Dynamic SEO Meta Description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        "content",
+        "Discover the best tech deals on Suyooh. Find discounted laptops, gadgets, accessories, and electronics—all curated to help you save more."
+      );
+    }
   }, []);
 
   const saveReport = (data: SearchResult, niche: string) => {
@@ -114,8 +122,8 @@ export default function DealFinder() {
                 <span className="text-indigo-600">Identify the source.</span>
               </h2>
               <p className="text-xl text-slate-500 mb-10 leading-relaxed max-w-2xl mx-auto">
-                Real-time market analysis that doesn&apos;t just find products—it
-                builds your entire supply chain report in seconds.
+                Real-time market analysis that doesn&apos;t just find
+                products—it builds your entire supply chain report in seconds.
               </p>
             </div>
 
