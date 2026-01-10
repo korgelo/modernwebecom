@@ -93,7 +93,7 @@ export default function Home() {
                 />
               </div>
               {/* Quick stats floating bar */}
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-8 border border-slate-100 hidden sm:flex">
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-4 shadow-xl items-center gap-8 border border-slate-100 hidden sm:flex">
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-slate-400 uppercase">
                     Editor Score
