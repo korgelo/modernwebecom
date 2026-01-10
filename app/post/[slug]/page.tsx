@@ -374,7 +374,7 @@ export default function PostDetail() {
                 </p>
                 <Link href="/deal">
                   <button className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg">
-                    Learn More
+                    Find Best Deal
                   </button>
                 </Link>
                 <p className="text-[10px] text-slate-400 text-center italic mt-2">

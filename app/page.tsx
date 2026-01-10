@@ -240,7 +240,7 @@ export default function Home() {
               </p>
               <Link href="/deal">
                 <button className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-800 transition-all shadow-lg">
-                  Learn More
+                  Find Best Deal
                 </button>
               </Link>
               <p className="text-[10px] text-slate-400 text-center italic mt-2">
@@ -251,7 +251,9 @@ export default function Home() {
             {/* Deal of the day */}
             <div className="border border-slate-200 rounded-3xl p-6 bg-white">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-bold text-slate-900">Today&apos;s Best Deal</h3>
+                <h3 className="font-bold text-slate-900">
+                  Today&apos;s Best Deal
+                </h3>
                 <span className="text-[10px] font-black bg-rose-500 text-white px-2 py-0.5 rounded animate-pulse">
                   45% OFF
                 </span>
@@ -267,8 +269,8 @@ export default function Home() {
                 Tech Deal Finder
               </h4>
               <p className="text-slate-500 text-xs mb-4 line-clamp-2">
-                Real-time market analysis that doesn&apos;t just find products—it
-                builds your entire supply chain report in seconds.
+                Real-time market analysis that doesn&apos;t just find
+                products—it builds your entire supply chain report in seconds.
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
