@@ -68,7 +68,7 @@ export default function Home() {
                 {featuredPost.title}
               </h1>
               <p className="text-slate-400 text-lg sm:text-xl mb-8 leading-relaxed max-w-xl">
-                {featuredPost.excerpt}
+                {featuredPost.description}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
