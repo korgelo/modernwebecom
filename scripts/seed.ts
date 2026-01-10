@@ -1,5 +1,4 @@
 import { neon } from "@neondatabase/serverless";
-import { MOCK_POSTS, TRENDING_POSTS, SITE_NAME, AFFILIATE_DISCLAIMER } from "../constants";
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -10,8 +9,77 @@ if (!connectionString) {
 
 const sql = neon(connectionString);
 
+const SITE_NAME = "SuyoohTechBlog";
+const AFFILIATE_DISCLAIMER =
+  "SuyoohTechBlog is supported by its audience. When you purchase through links on our site, we may earn an affiliate commission at no extra cost to you.";
+
+const TRENDING_POSTS = [
+  {
+    id: "apple-ai-ios-18",
+    title: "Apple Intelligence arrives with iOS 18.2 features",
+    shortTitle: "Apple AI & iOS 18.2",
+    slug: "apple-intelligence-ios-18-guide",
+    description:
+      "iOS 18.2 marks a major shift for iPhone users with ChatGPT integration and Image Playground.",
+    keyInsight:
+      "Native AI integration is redefining the premium smartphone user experience.",
+    category: "Software",
+    ctaText: "Explore AI Features",
+  },
+  {
+    id: "nvidia-rtx-50-leaks",
+    title: "NVIDIA RTX 50-Series: Blackwell GPU Specs Leaked",
+    shortTitle: "NVIDIA RTX 50-Series",
+    slug: "nvidia-rtx-50-series-specs-leak",
+    description:
+      "Ahead of CES 2025, leaks for the RTX 5090 and 5080 suggest massive performance gains.",
+    keyInsight:
+      "Blackwell architecture is poised to dominate high-end gaming performance in 2025.",
+    category: "Hardware",
+    ctaText: "View GPU Specs",
+  },
+  {
+    id: "openai-o1-model-launch",
+    title: "OpenAI o1 Reasoning Model: New Era of AI Logic",
+    shortTitle: "OpenAI o1 Model",
+    slug: "openai-o1-reasoning-model-full-release",
+    description:
+      "OpenAI has transitioned its o1 model to full availability for complex reasoning.",
+    keyInsight:
+      "AI is shifting from simple chat to advanced multi-step reasoning capabilities.",
+    category: "Artificial Intelligence",
+    ctaText: "Try OpenAI o1",
+  },
+  {
+    id: "samsung-galaxy-s25-rumors",
+    title: "Samsung Galaxy S25: Ultra Thinner Design & Specs",
+    shortTitle: "Galaxy S25 Rumors",
+    slug: "samsung-galaxy-s25-ultra-rumors",
+    description:
+      "The Galaxy S25 Ultra is set to debut with a sleek design and Snapdragon 8 Elite chip.",
+    keyInsight:
+      "The Snapdragon 8 Elite chipset will likely lead 2025 mobile performance benchmarks.",
+    category: "Mobile",
+    ctaText: "Pre-order Updates",
+  },
+  {
+    id: "nintendo-switch-2-updates",
+    title: "Nintendo Switch 2: New Production Reports & Display",
+    shortTitle: "Nintendo Switch 2",
+    slug: "nintendo-switch-2-production-leaks",
+    description:
+      "Recent production reports confirm backward compatibility for the Nintendo Switch 2.",
+    keyInsight:
+      "Backward compatibility ensures a smooth transition for the existing Nintendo user base.",
+    category: "Gaming",
+    ctaText: "Check Release Date",
+  },
+];
+
 async function seed() {
   console.log("Starting database seed...");
+  console.log("Note: This script seeds site settings and trending posts only.");
+  console.log("Post data is managed directly in the database.");
 
   try {
     console.log("Inserting site settings...");
@@ -37,61 +105,6 @@ async function seed() {
       `;
     }
     console.log(`Inserted ${TRENDING_POSTS.length} trending posts`);
-
-    console.log("Inserting posts and products...");
-    for (const post of MOCK_POSTS) {
-      await sql`
-        INSERT INTO posts (id, slug, title, description, content, category, date, featured_image, featured)
-        VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.content}, ${post.category}, ${post.date}, ${post.featuredImage}, ${post.featured || false})
-        ON CONFLICT (id) DO UPDATE SET
-          slug = EXCLUDED.slug,
-          title = EXCLUDED.title,
-          description = EXCLUDED.description,
-          content = EXCLUDED.content,
-          category = EXCLUDED.category,
-          date = EXCLUDED.date,
-          featured_image = EXCLUDED.featured_image,
-          featured = EXCLUDED.featured,
-          updated_at = NOW()
-      `;
-
-      if (post.product) {
-        const specs = JSON.stringify(post.product.specs);
-        await sql`
-          INSERT INTO products (post_id, name, brand, price, rating, amazon_link, image_url, specs, pros, cons)
-          VALUES (${post.id}, ${post.product.name}, ${post.product.brand}, ${post.product.price}, ${post.product.rating}, ${post.product.amazonLink}, ${post.product.imageUrl}, ${specs}::jsonb, ${post.product.pros}, ${post.product.cons})
-          ON CONFLICT (post_id) DO UPDATE SET
-            name = EXCLUDED.name,
-            brand = EXCLUDED.brand,
-            price = EXCLUDED.price,
-            rating = EXCLUDED.rating,
-            amazon_link = EXCLUDED.amazon_link,
-            image_url = EXCLUDED.image_url,
-            specs = EXCLUDED.specs,
-            pros = EXCLUDED.pros,
-            cons = EXCLUDED.cons
-        `;
-      }
-
-      if (post.compareWith) {
-        const specs = JSON.stringify(post.compareWith.specs);
-        await sql`
-          INSERT INTO compare_products (post_id, name, brand, price, rating, amazon_link, image_url, specs, pros, cons)
-          VALUES (${post.id}, ${post.compareWith.name}, ${post.compareWith.brand}, ${post.compareWith.price}, ${post.compareWith.rating}, ${post.compareWith.amazonLink}, ${post.compareWith.imageUrl}, ${specs}::jsonb, ${post.compareWith.pros}, ${post.compareWith.cons})
-          ON CONFLICT (post_id) DO UPDATE SET
-            name = EXCLUDED.name,
-            brand = EXCLUDED.brand,
-            price = EXCLUDED.price,
-            rating = EXCLUDED.rating,
-            amazon_link = EXCLUDED.amazon_link,
-            image_url = EXCLUDED.image_url,
-            specs = EXCLUDED.specs,
-            pros = EXCLUDED.pros,
-            cons = EXCLUDED.cons
-        `;
-      }
-    }
-    console.log(`Inserted ${MOCK_POSTS.length} posts with products`);
 
     console.log("Database seed completed successfully!");
   } catch (error) {

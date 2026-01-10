@@ -1,9 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { Monitor } from "lucide-react";
-import { SITE_NAME, AFFILIATE_DISCLAIMER } from "@/constants";
+import { getSiteName, getAffiliateDisclaimer } from "@/lib/posts";
 
-const Footer: React.FC = () => {
+const Footer = async () => {
+  const [siteName, affiliateDisclaimer] = await Promise.all([
+    getSiteName(),
+    getAffiliateDisclaimer(),
+  ]);
+
   return (
     <footer className="bg-slate-900 text-slate-300">
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
@@ -119,10 +124,10 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="text-xs text-slate-500 space-y-4">
-          <p className="italic leading-relaxed">{AFFILIATE_DISCLAIMER}</p>
+          <p className="italic leading-relaxed">{affiliateDisclaimer}</p>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-800 pt-8">
             <p>
-              &copy; {new Date().getFullYear()} {SITE_NAME}. All rights
+              &copy; {new Date().getFullYear()} {siteName}. All rights
               reserved. Designed for US Consumers.
             </p>
             <div className="flex gap-6">
