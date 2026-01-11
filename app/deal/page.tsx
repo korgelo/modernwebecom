@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import type { Metadata } from "next";
 import { SearchInput } from "@/components/SearchInput";
 import { ProductCard } from "@/components/ProductCard";
 import { generateIntegratedMarketReport } from "@/services/geminiService";
 import { AppView, SearchResult, SavedReport } from "@/types";
+import ReactMarkdown from "react-markdown";
 import {
   AlertCircle,
   History,
@@ -12,7 +14,17 @@ import {
   BarChart3,
   Globe2,
 } from "lucide-react";
-import ReactMarkdown from "react-markdown";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Find the Best Tech Deals on Suyooh – Laptops, Headsets & Gadgets",
+    description:
+      "Discover the best tech deals on Suyooh. Find discounted laptops, gadgets, accessories, and electronics—all curated to help you save more.",
+    alternates: {
+      canonical: "https://www.suyooh.com/deal",
+    },
+  };
+}
 
 export default function DealFinder() {
   const [view, setView] = useState<AppView>(AppView.HOME);
@@ -32,17 +44,6 @@ export default function DealFinder() {
       } catch (e) {
         console.error("Failed to load saved reports");
       }
-    }
-    // Dynamic SEO Title
-    document.title = `Find the Best Tech Deals on Suyooh – Laptops, Headsets & Gadgets`;
-
-    // Dynamic SEO Meta Description
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        "content",
-        "Discover the best tech deals on Suyooh. Find discounted laptops, gadgets, accessories, and electronics—all curated to help you save more."
-      );
     }
   }, []);
 

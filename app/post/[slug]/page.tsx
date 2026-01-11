@@ -1,12 +1,13 @@
 import React from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
 import {
   getPostBySlug,
   getPostsByCategory,
   getAffiliateDisclaimer,
 } from "@/lib/posts";
-import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
 import {
   CheckCircle2,
   Calendar,
@@ -16,7 +17,6 @@ import {
   LinkIcon,
   Info,
 } from "lucide-react";
-import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
