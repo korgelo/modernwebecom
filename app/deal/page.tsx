@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import type { Metadata } from "next";
 import { SearchInput } from "@/components/SearchInput";
 import { ProductCard } from "@/components/ProductCard";
 import { generateIntegratedMarketReport } from "@/services/geminiService";
@@ -14,9 +13,6 @@ import {
   BarChart3,
   Globe2,
 } from "lucide-react";
-
-// Note: `generateMetadata` must be exported from a server module.
-// Moved to `app/deal/metadata.ts` to keep this component a client component.
 
 export default function DealFinder() {
   const [view, setView] = useState<AppView>(AppView.HOME);
