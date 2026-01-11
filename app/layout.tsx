@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description:
     "Expert tech reviews, electronics buying guides, and latest gadget comparisons for United States consumers.",
   robots: "index, follow, max-image-preview:large",
+  metadataBase: new URL("https://www.suyooh.com"),
   icons: {
     icon: "../public/assets/suyooh-logo.jpg",
     shortcut: "../public/assets/suyooh-logo.jpg",

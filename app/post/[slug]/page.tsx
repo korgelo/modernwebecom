@@ -1,7 +1,11 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getPostBySlug, getPostsByCategory, getAffiliateDisclaimer } from "@/lib/posts";
+import {
+  getPostBySlug,
+  getPostsByCategory,
+  getAffiliateDisclaimer,
+} from "@/lib/posts";
 import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
 import {
   CheckCircle2,
@@ -18,10 +22,12 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  
+
   if (!post) {
     return {
       title: "Review Not Found | SuyoohTech Blog",
@@ -31,10 +37,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${post.title} | SuyoohTech Blog`,
     description: post.description,
+    alternates: {
+      canonical: `https://www.suyooh.com/post/${post.slug}`,
+    },
   };
 }
 
-function generateJsonLd(post: NonNullable<Awaited<ReturnType<typeof getPostBySlug>>>) {
+function generateJsonLd(
+  post: NonNullable<Awaited<ReturnType<typeof getPostBySlug>>>
+) {
   return {
     "@context": "https://schema.org",
     "@type": "Review",
@@ -143,15 +154,17 @@ export default async function PostDetail({ params }: PageProps) {
   }
 
   const relatedPosts = await getPostsByCategory(post.category);
-  const filteredRelatedPosts = relatedPosts.filter((p) => p.id !== post.id).slice(0, 10);
+  const filteredRelatedPosts = relatedPosts
+    .filter((p) => p.id !== post.id)
+    .slice(0, 10);
   const jsonLd = generateJsonLd(post);
 
-    return (
-      <div className="bg-white min-h-screen">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+  return (
+    <div className="bg-white min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Article Header */}
       <header className="bg-slate-50 border-b border-slate-200 pt-12 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -322,31 +335,31 @@ export default async function PostDetail({ params }: PageProps) {
                   <Share2 size={18} className="text-blue-600" /> More from{" "}
                   {post.category}
                 </h3>
-                                <div className="space-y-6">
-                                  {filteredRelatedPosts.map((p) => (
-                                      <Link
-                                        key={p.id}
-                                        href={`/post/${p.slug}`}
-                                        className="flex gap-4 group"
-                                      >
-                                        <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-100">
-                                          <img
-                                            src={p.featuredImage}
-                                            alt={p.title}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                                          />
-                                        </div>
-                                        <div>
-                                          <h4 className="font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
-                                            {p.title}
-                                          </h4>
-                                          <span className="text-[10px] text-slate-400 font-bold uppercase mt-1 block">
-                                            {p.date}
-                                          </span>
-                                        </div>
-                                      </Link>
-                                    ))}
-                                </div>
+                <div className="space-y-6">
+                  {filteredRelatedPosts.map((p) => (
+                    <Link
+                      key={p.id}
+                      href={`/post/${p.slug}`}
+                      className="flex gap-4 group"
+                    >
+                      <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-100">
+                        <img
+                          src={p.featuredImage}
+                          alt={p.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-sm text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
+                          {p.title}
+                        </h4>
+                        <span className="text-[10px] text-slate-400 font-bold uppercase mt-1 block">
+                          {p.date}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
 
               {/* DealFinder Side Box */}
@@ -375,9 +388,9 @@ export default async function PostDetail({ params }: PageProps) {
                     Affiliate Link Info
                   </span>
                 </div>
-                                <p className="text-xs text-slate-500 leading-relaxed">
-                                  {affiliateDisclaimer}
-                                </p>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  {affiliateDisclaimer}
+                </p>
               </div>
             </div>
           </aside>
