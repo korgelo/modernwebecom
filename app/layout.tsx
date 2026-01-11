@@ -88,12 +88,6 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-NC9JL5T2');
           `}
         </Script>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9465532368889991"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
         {/* Google Ads / gtag */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-922060105"
