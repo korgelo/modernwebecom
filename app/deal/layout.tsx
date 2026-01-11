@@ -13,6 +13,14 @@ export const metadata: Metadata = {
       "Discover the best tech deals on Suyooh. Find discounted laptops, gadgets, accessories, and electronics—all curated to help you save more.",
     url: "https://www.suyooh.com/deal",
     siteName: "Suyooh",
+    images: [
+      {
+        url: "/assets/images/pc/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Suyooh Deals",
+      },
+    ],
     type: "website",
   },
   twitter: {
@@ -22,3 +30,11 @@ export const metadata: Metadata = {
       "Discover curated tech deals—laptops, headsets, accessories and more.",
   },
 };
+
+export default function DealLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
+}
