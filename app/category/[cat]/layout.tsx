@@ -17,9 +17,9 @@ const slugToDisplayName: Record<string, string> = {
 export async function generateMetadata({
   params,
 }: {
-  params: { cat: string };
+  params: Promise<{ cat: string }>;
 }): Promise<Metadata> {
-  const { cat } = params || { cat: undefined };
+  const { cat } = (await params) || { cat: undefined };
   const siteName = await getSiteName();
 
   const category = cat
