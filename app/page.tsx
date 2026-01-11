@@ -30,18 +30,6 @@ const CATEGORIES = Object.values(Category).map((slug) => ({
   image: CATEGORY_META[slug].image,
 }));
 
-export const metadata = {
-  title: "SuyoohTech | Latest Gadget Reviews",
-  description:
-    "SuyoohTech Blog provides honest, data-driven electronics reviews, computer buying guides, and the latest gadget comparisons for American consumers.",
-  icons: {
-    icon: "../public/assets/suyooh-logo.jpg",
-    shortcut: "../public/assets/suyooh-logo.jpg",
-    apple: "../public/assets/suyooh-logo.jpg",
-  },
-  canonical: "https://www.suyooh.com",
-};
-
 export default async function Home() {
   const [posts, trendingPosts] = await Promise.all([
     getAllPosts(),

@@ -18,8 +18,27 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "SuyoohTech | Latest Gadget Reviews",
   description:
-    "Expert tech reviews, electronics buying guides, and latest gadget comparisons for United States consumers.",
-  robots: "index, follow, max-image-preview:large",
+    "SuyoohTech Blog provides honest, data-driven electronics reviews, computer buying guides, and the latest gadget comparisons for American consumers.",
+
+  alternates: {
+    canonical: "https://www.suyooh.com",
+  },
+
+  icons: {
+    icon: "/assets/suyooh-logo.jpg",
+    shortcut: "/assets/suyooh-logo.jpg",
+    apple: "/assets/suyooh-logo.jpg",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
 };
 
 export default function RootLayout({
