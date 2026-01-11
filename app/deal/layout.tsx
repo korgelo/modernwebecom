@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     siteName: "Suyooh",
     images: [
       {
-        url: "/assets/images/pc/hero.jpg",
+        url: "/assets/images/suyoohdeal.jpg",
         width: 1200,
         height: 630,
         alt: "Suyooh Deals",
