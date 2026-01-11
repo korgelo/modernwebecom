@@ -39,6 +39,21 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
     },
   },
+  openGraph: {
+    title: "SuyoohTech | Latest Gadget Reviews",
+    description: "Honest gadget reviews, buying guides, and tech comparisons.",
+    url: "https://www.suyooh.com",
+    siteName: "SuyoohTech",
+    images: [
+      {
+        url: "/assets/suyooh-logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SuyoohTech Logo",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default function RootLayout({
