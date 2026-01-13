@@ -5,9 +5,11 @@ import { ProductListing } from '../types';
 interface ListingCardProps {
   listing: ProductListing;
   onDelete: (id: string) => void;
+  onSave: (listing: ProductListing) => void;
+  isSaving: boolean;
 }
 
-export const ListingCard: React.FC<ListingCardProps> = ({ listing, onDelete }) => {
+export const ListingCard: React.FC<ListingCardProps> = ({ listing, onDelete, onSave, isSaving }) => {
   const priceString = listing.product.price;
   const numericPrice = parseFloat(priceString.replace(/[$,]/g, '')) || 0;
   const originalPrice = listing.originalPrice;
@@ -131,14 +133,23 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing, onDelete }) =
                 </div>
                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{listing.reviews.toLocaleString()} Reviews</span>
              </div>
-             <a 
-              href={listing.product.amazonLink} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="px-6 py-2.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-indigo-600 transition-colors shadow-lg shadow-slate-200"
-            >
-              Amazon Link
-            </a>
+             <div className="flex items-center gap-2">
+              <a
+                  href={listing.product.amazonLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-indigo-600 transition-colors shadow-lg shadow-slate-200"
+                >
+                  Amazon Link
+                </a>
+              <button
+                onClick={() => onSave(listing)}
+                disabled={isSaving || listing.isSaved}
+                className="px-6 py-2.5 bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-100 disabled:bg-slate-100 disabled:text-slate-400"
+              >
+                {isSaving ? 'Saving...' : listing.isSaved ? 'Saved' : 'Save'}
+              </button>
+            </div>
           </div>
         </div>
       </div>

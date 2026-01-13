@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import { ProductListing, GenerationStatus, FormInputs } from '@/types';
-import { scrapeAndGenerateListing } from '@/services/geminiService';
+import { scrapeAndGenerateListing, saveListing } from '@/services/geminiService';
 import { ListingCard } from '@/components/ListingCard';
 
 const INITIAL_FORM_STATE: FormInputs = {
@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [listings, setListings] = useState<ProductListing[]>([]);
   const [status, setStatus] = useState<GenerationStatus>(GenerationStatus.IDLE);
   const [error, setError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const saved = localStorage.getItem('affiliate_listings_v9');
@@ -101,7 +102,21 @@ const App: React.FC = () => {
     setListings(prev => prev.filter(l => l.internalId !== id));
   }, []);
 
-
+  const handleSave = async (listing: ProductListing) => {
+    setIsSaving(prev => ({ ...prev, [listing.internalId]: true }));
+    try {
+      const savedListing = await saveListing(listing);
+      setListings(prev =>
+        prev.map(l =>
+          l.internalId === listing.internalId ? { ...l, isSaved: true } : l
+        )
+      );
+    } catch (err: any) {
+      setError(err.message || "Failed to save listing.");
+    } finally {
+      setIsSaving(prev => ({ ...prev, [listing.internalId]: false }));
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#fcfcfd] flex flex-col font-['Inter']">
@@ -229,7 +244,9 @@ const App: React.FC = () => {
                 <ListingCard 
                   key={listing.internalId} 
                   listing={listing} 
-                  onDelete={handleDelete} 
+                  onDelete={handleDelete}
+                  onSave={handleSave}
+                  isSaving={isSaving[listing.internalId] || false}
                 />
               ))}
             </div>
