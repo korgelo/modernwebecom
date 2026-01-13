@@ -97,3 +97,54 @@ export interface SavedReport {
   timestamp: number;
   data: SearchResult;
 }
+
+// Scraper
+
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
+export interface ProductDetails {
+  name: string;
+  brand: string;
+  price: string; // String with $ sign
+  rating: number;
+  specs: ProductSpec[];
+  pros: string[];
+  cons: string[];
+  amazonLink: string;
+  imageUrl: string;
+}
+
+export interface ProductListing {
+  id: string; // Amazon ASIN
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  featuredImage: string; // New field for blog post assets
+  content: string;
+  product: ProductDetails;
+
+  // Internal tracking fields for the UI
+  internalId: string;
+  sourceLink: string;
+  timestamp: number;
+  originalPrice: number;
+  reviews: number;
+}
+
+export interface FormInputs {
+  sourceLink: string;
+  amazonLink: string;
+  imageUrl: string;
+}
+
+export enum GenerationStatus {
+  IDLE = "IDLE",
+  LOADING = "LOADING",
+  SUCCESS = "SUCCESS",
+  ERROR = "ERROR",
+}
