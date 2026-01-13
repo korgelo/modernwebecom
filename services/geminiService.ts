@@ -1,4 +1,4 @@
-import { SearchResult } from "@/types";
+import { SearchResult, ProductListing } from "@/types";
 
 export const generateIntegratedMarketReport = async (
   niche: string
@@ -18,7 +18,7 @@ export const generateIntegratedMarketReport = async (
 
 export const scrapeAndGenerateListing = async (
   inputs: string
-): Promise<SearchResult> => {
+): Promise<ProductListing> => {
   const res = await fetch("/api/gemini", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
