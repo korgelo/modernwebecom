@@ -133,6 +133,7 @@ export interface ProductListing {
   timestamp: number;
   originalPrice: number;
   reviews: number;
+  isSaved?: boolean;
 }
 
 export interface FormInputs {
