@@ -104,7 +104,6 @@ export interface ProductSpec {
   label: string;
   value: string;
 }
-
 export interface ProductDetails {
   name: string;
   brand: string;
