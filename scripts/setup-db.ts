@@ -12,8 +12,12 @@ const sql = neon(connectionString);
 
 async function setupDatabase() {
   try {
+    // Drop the table first to ensure a clean setup
+    await sql`DROP TABLE IF EXISTS product_listings;`;
+    console.log("Dropped table 'product_listings' if it existed.");
+
     await sql`
-      CREATE TABLE IF NOT EXISTS product_listings (
+      CREATE TABLE product_listings (
         id SERIAL PRIMARY KEY,
         asin TEXT UNIQUE NOT NULL,
         slug TEXT,
@@ -28,9 +32,10 @@ async function setupDatabase() {
         updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
       );
     `;
-    console.log("Table 'product_listings' created or already exists.");
+    console.log("Table 'product_listings' created successfully.");
   } catch (error) {
     console.error("Error setting up the database:", error);
+    process.exit(1);
   }
 }
 

@@ -31,7 +31,16 @@ export async function POST(req: Request) {
         asin, slug, title, excerpt, category, publish_date, featured_image, content, product_details
       )
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-      ON CONFLICT (asin) DO NOTHING
+      ON CONFLICT (asin) DO UPDATE SET
+        slug = EXCLUDED.slug,
+        title = EXCLUDED.title,
+        excerpt = EXCLUDED.excerpt,
+        category = EXCLUDED.category,
+        publish_date = EXCLUDED.publish_date,
+        featured_image = EXCLUDED.featured_image,
+        content = EXCLUDED.content,
+        product_details = EXCLUDED.product_details,
+        updated_at = CURRENT_TIMESTAMP
       RETURNING *;
     `;
 
@@ -49,12 +58,12 @@ export async function POST(req: Request) {
 
     const result = await query<{ id: number }>(insertQuery, params);
 
-    // Check if a row was inserted or if it was a conflict
+    // With ON CONFLICT DO UPDATE, we should always get a result back.
     if (result.length === 0) {
-      // This case means the ASIN already existed, and we did nothing.
-      // We can consider this a "soft" success, as the data is in the DB.
-      // We'll return the original listing data and mark it as saved.
-      return NextResponse.json({ ...listing, isSaved: true });
+      return NextResponse.json(
+        { error: "Database operation failed to return a result." },
+        { status: 500 }
+      );
     }
 
     const savedListing = result[0];
