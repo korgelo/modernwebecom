@@ -47,7 +47,7 @@ export async function POST(req: Request) {
       JSON.stringify(product_details),
     ];
 
-    const result = await query(insertQuery, params);
+    const result = await query<{ id: number }>(insertQuery, params);
 
     // Check if a row was inserted or if it was a conflict
     if (result.length === 0) {
