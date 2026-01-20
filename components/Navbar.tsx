@@ -105,11 +105,13 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 pb-4">
           <div className="pt-2 pb-3 space-y-1">
-            <List size={24} />
+            
             <Link
                 href="/product"
+                onClick={() => setIsOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50"
               >
+                <List size={24} />
                 All product list
               </Link>
               
