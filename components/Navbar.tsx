@@ -17,7 +17,6 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
-    { name: "All product list", icon: <List size={18} />, slug: "products" },
     { name: "Laptops", icon: <Monitor size={18} />, slug: "laptops" },
     {
       name: "Headset",
@@ -106,6 +105,13 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 pb-4">
           <div className="pt-2 pb-3 space-y-1">
+            <Link
+                href="/product"
+                className="flex items-center gap-3 px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50"
+              >
+                All product list
+              </Link>
+              <List className="text-white" size={24} />
             {categories.map((cat) => (
               <Link
                 key={cat.name}
