@@ -46,6 +46,12 @@ const Navbar: React.FC = () => {
               </span>
             </Link>
             <div className="hidden md:ml-8 md:flex md:space-x-6">
+              <Link
+                href="/product"
+                className="text-slate-600 hover:text-blue-600 inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors"
+              >
+                All shortcut product
+              </Link>
               {categories.slice(0, 3).map((cat) => (
                 <Link
                   key={cat.name}
