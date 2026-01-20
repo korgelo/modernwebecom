@@ -19,7 +19,7 @@ const ProductPage = async () => {
           <main>
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
-                All shortcut product
+                All product list
                 <div className="h-1.5 w-1.5 rounded-full bg-blue-600"></div>
               </h2>
               <Link
