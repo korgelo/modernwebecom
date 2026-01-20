@@ -6,6 +6,7 @@ import {
   X,
   Search,
   ChevronDown,
+  List,
   Monitor,
   Headset,
   Smartphone,
@@ -16,6 +17,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
+    { name: "All product list", icon: <List size={18} />, slug: "product" },
     { name: "Laptops", icon: <Monitor size={18} />, slug: "laptops" },
     {
       name: "Headset",
@@ -46,12 +48,6 @@ const Navbar: React.FC = () => {
               </span>
             </Link>
             <div className="hidden md:ml-8 md:flex md:space-x-6">
-              <Link
-                href="/product"
-                className="text-slate-600 hover:text-blue-600 inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors"
-              >
-                All product list
-              </Link>
               {categories.slice(0, 3).map((cat) => (
                 <Link
                   key={cat.name}
