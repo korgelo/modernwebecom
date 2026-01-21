@@ -5,14 +5,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allPosts = await getAllPosts();
 
   const posts = allPosts.map((post) => ({
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}/post/${post.slug}`,
+    url: `${"https://www.suyooh.com"}/post/${post.slug}`,
     lastModified: new Date(post.date),
     priority: 0.8,
   }));
 
   const categories = [...new Set(allPosts.map((post) => post.category))].map(
     (category) => ({
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/category/${category}`,
+      url: `${"https://www.suyooh.com"}/category/${category}`,
       lastModified: new Date(),
       priority: 0.6,
     })
@@ -20,17 +20,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPages = [
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
+      url: `${"https://www.suyooh.com"}/`,
       lastModified: new Date(),
       priority: 1,
     },
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/deal`,
+      url: `${"https://www.suyooh.com"}/deal`,
       lastModified: new Date(),
       priority: 0.7,
     },
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/product`,
+      url: `${"https://www.suyooh.com"}/product`,
       lastModified: new Date(),
       priority: 0.7,
     },
