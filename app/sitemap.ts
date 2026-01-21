@@ -10,14 +10,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const categories = [...new Set(allPosts.map((post) => post.category))].map(
-    (category) => ({
-      url: `${"https://www.suyooh.com"}/category/${category}`,
-      lastModified: new Date(),
-      priority: 0.6,
-    })
-  );
-
   const staticPages = [
     {
       url: `${"https://www.suyooh.com"}/`,
@@ -34,7 +26,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       priority: 0.7,
     },
+        {
+      url: `${"https://www.suyooh.com"}/category/laptop`,
+      lastModified: new Date(),
+      priority: 0.7,
+    },
+    {
+      url: `${"https://www.suyooh.com"}/category/headset`,
+      lastModified: new Date(),
+      priority: 0.7,
+    },
+    {
+      url: `${"https://www.suyooh.com"}/category/smartphone`,
+      lastModified: new Date(),
+      priority: 0.7,
+    },
   ];
 
-  return [...staticPages, ...posts, ...categories];
+  return [...staticPages, ...posts];
 }
