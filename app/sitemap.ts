@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
         {
-      url: `${"https://www.suyooh.com"}/category/laptop`,
+      url: `${"https://www.suyooh.com"}/category/laptops`,
       lastModified: new Date(),
       priority: 0.7,
     },
@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${"https://www.suyooh.com"}/category/smartphone`,
+      url: `${"https://www.suyooh.com"}/category/smartwatch`,
       lastModified: new Date(),
       priority: 0.7,
     },
