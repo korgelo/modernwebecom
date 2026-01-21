@@ -1,35 +1,4 @@
 import { MetadataRoute } from "next";
-<<<<<<< HEAD
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Example: dynamic data (blog posts, products, deals)
-  const posts = await fetch("", {
-    cache: "no-store",
-  }).then((res) => res.json());
-
-  const postUrls = posts.map((post: any) => ({
-    url: `https://www.suyooh.com/post/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
-
-  return [
-    {
-      url: "https://www.suyooh.com",
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-    {
-      url: "https://www.suyooh.com/deal",
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    ...postUrls,
-  ];
-=======
 import { getAllPosts } from "@/lib/posts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -68,5 +37,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   return [...staticPages, ...posts, ...categories];
->>>>>>> 913e71b10d43871c3e7e8c01859117e661ef9dda
 }
