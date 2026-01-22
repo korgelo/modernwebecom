@@ -21,6 +21,7 @@ export interface DbProduct {
   brand: string;
   price: string;
   rating: string;
+  ratingCount: number;
   amazon_link: string;
   image_url: string;
   specs: ProductSpec[];
@@ -70,6 +71,7 @@ export function mapDbProductToProduct(dbProduct: DbProduct): Product {
     brand: dbProduct.brand,
     price: dbProduct.price,
     rating: parseFloat(dbProduct.rating),
+    ratingCount: dbProduct.ratingCount,
     specs: dbProduct.specs,
     pros: dbProduct.pros,
     cons: dbProduct.cons,
