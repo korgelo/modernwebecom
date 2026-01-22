@@ -14,6 +14,7 @@ export interface Product {
   brand: string;
   price: string;
   rating: number;
+  ratingCount: number;
   specs: ProductSpec[];
   pros: string[];
   cons: string[];

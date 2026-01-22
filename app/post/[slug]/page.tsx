@@ -82,6 +82,7 @@ function generateJsonLd(
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: post.product?.rating,
+        ratingCount: post.product?.ratingCount,
       },
       offers: {
         "@type": "Offer",
