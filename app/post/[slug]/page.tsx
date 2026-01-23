@@ -22,28 +22,21 @@ import {
 /* Types */
 /* ------------------------------------------------------------------ */
 
-type RouteParams = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
-
-type Post = Awaited<ReturnType<typeof getPostBySlug>>;
+interface PageProps {
+  params: { slug: string };
+}
 
 /* ------------------------------------------------------------------ */
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
 export async function generateMetadata(
-  { params }: RouteParams
+  { params }: { params: { slug: string } }
 ): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
-    return {
-      title: "Review Not Found | SuyoohTech Blog",
-    };
+    return { title: "Review Not Found | SuyoohTech Blog" };
   }
 
   return {
@@ -121,11 +114,9 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* Page */
 /* ------------------------------------------------------------------ */
 
-export default async function PostDetail({ params }: RouteParams) {
-  const { slug } = await params;
-
+export default async function PostDetail({ params }: PageProps) {
   const [post, affiliateDisclaimer] = await Promise.all([
-    getPostBySlug(slug),
+    getPostBySlug(params.slug),
     getAffiliateDisclaimer(),
   ]);
 
