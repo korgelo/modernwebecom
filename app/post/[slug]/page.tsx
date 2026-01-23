@@ -112,12 +112,15 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* Page */
 /* ------------------------------------------------------------------ */
 
-interface PageParams {
-  params: Promise<{ slug: string }>;
-}
+// interface PageProps {
+//   params: Promise<{ slug: string }>;
+// }
 
-export default async function PostDetail({ params }: PageParams) {
-  const { slug } = await Promise.resolve(params);
+export default async function PostDetail(props: {
+  params: { slug: string };
+}) {
+  const params = props.params;
+  const {slug} = await Promise.resolve(params);
   const [post, affiliateDisclaimer] = await Promise.all([
     getPostBySlug(slug),
     getAffiliateDisclaimer(),
