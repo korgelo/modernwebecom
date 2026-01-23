@@ -22,10 +22,12 @@ import {
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } }
-): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+export async function generateMetadata(props: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { slug } = props.params;
+
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Review Not Found | SuyoohTech Blog" };
@@ -106,13 +108,13 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* Page */
 /* ------------------------------------------------------------------ */
 
-export default async function PostDetail({
-  params,
-}: {
+export default async function PostDetail(props: {
   params: { slug: string };
 }) {
+  const { slug } = props.params;
+
   const [post, affiliateDisclaimer] = await Promise.all([
-    getPostBySlug(params.slug),
+    getPostBySlug(slug),
     getAffiliateDisclaimer(),
   ]);
 
