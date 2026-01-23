@@ -20,11 +20,6 @@ import {
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
-export default async function PostDetail(props: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await props.params;
-
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;}
 ): Promise<Metadata> {
