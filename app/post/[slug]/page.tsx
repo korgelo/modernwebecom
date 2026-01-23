@@ -17,21 +17,19 @@ import {
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
-/* Types */
-/* ------------------------------------------------------------------ */
-
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
-
-/* ------------------------------------------------------------------ */
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } }
+export default async function PostDetail(props: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await props.params;
+
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;}
 ): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await props.params;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Review Not Found | SuyoohTech Blog" };
