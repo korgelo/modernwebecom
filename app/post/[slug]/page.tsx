@@ -2,35 +2,47 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
-import {
-  getPostBySlug,
-  getPostsByCategory,
-  getAffiliateDisclaimer,
-} from "@/lib/posts";
 import {
   CheckCircle2,
   Calendar,
   Share2,
   MessageSquare,
   ChevronRight,
-  LinkIcon,
-  Info,
 } from "lucide-react";
+
+import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
+import {
+  getPostBySlug,
+  getPostsByCategory,
+  getAffiliateDisclaimer,
+} from "@/lib/posts";
+
+/* ------------------------------------------------------------------ */
+/* Types */
+/* ------------------------------------------------------------------ */
+
+type RouteParams = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+type Post = Awaited<ReturnType<typeof getPostBySlug>>;
 
 /* ------------------------------------------------------------------ */
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
-export async function generateMetadata(props: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = props.params;
-
+export async function generateMetadata(
+  { params }: RouteParams
+): Promise<Metadata> {
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) {
-    return { title: "Review Not Found | SuyoohTech Blog" };
+    return {
+      title: "Review Not Found | SuyoohTech Blog",
+    };
   }
 
   return {
@@ -46,11 +58,12 @@ export async function generateMetadata(props: {
 /* JSON-LD */
 /* ------------------------------------------------------------------ */
 
-function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
-  if (!post || !post.product) return null;
+function buildReviewJsonLd(post: Post) {
+  if (!post?.product) return null;
 
-  const price =
-    post.product.price?.replace(/[^0-9.]/g, "") || undefined;
+  const price = post.product.price
+    ? post.product.price.replace(/[^0-9.]/g, "")
+    : undefined;
 
   return {
     "@context": "https://schema.org",
@@ -59,10 +72,12 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
     description: post.description,
     image: [post.featuredImage],
     datePublished: new Date(post.date).toISOString(),
+
     author: {
       "@type": "Organization",
       name: "SuyoohTech Blog Editorial Team",
     },
+
     publisher: {
       "@type": "Organization",
       name: "SuyoohTech Blog",
@@ -71,11 +86,15 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
         url: "https://picsum.photos/id/1/200/200",
       },
     },
-    reviewRating: post.product.rating && {
-      "@type": "Rating",
-      ratingValue: post.product.rating,
-      bestRating: "5",
-    },
+
+    reviewRating: post.product.rating
+      ? {
+          "@type": "Rating",
+          ratingValue: post.product.rating,
+          bestRating: "5",
+        }
+      : undefined,
+
     itemReviewed: {
       "@type": "Product",
       name: post.product.name,
@@ -84,6 +103,7 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
         "@type": "Brand",
         name: post.product.brand,
       },
+
       aggregateRating:
         post.product.rating && post.product.ratingCount
           ? {
@@ -92,14 +112,17 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
               ratingCount: post.product.ratingCount,
             }
           : undefined,
-      offers: post.product.amazonLink && {
-        "@type": "Offer",
-        url: post.product.amazonLink,
-        price,
-        priceCurrency: "USD",
-        availability: "https://schema.org/InStock",
-        priceValidUntil: "2026-12-31",
-      },
+
+      offers: post.product.amazonLink
+        ? {
+            "@type": "Offer",
+            url: post.product.amazonLink,
+            price,
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            priceValidUntil: "2026-12-31",
+          }
+        : undefined,
     },
   };
 }
@@ -108,11 +131,8 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* Page */
 /* ------------------------------------------------------------------ */
 
-export default async function PostDetail(props: {
-  params: { slug: string };
-}) {
-  const params = props.params;
-  const slug = params.slug;
+export default async function PostDetail({ params }: RouteParams) {
+  const { slug } = await params;
 
   const [post, affiliateDisclaimer] = await Promise.all([
     getPostBySlug(slug),
@@ -125,7 +145,7 @@ export default async function PostDetail(props: {
     .filter((p) => p.id !== post.id)
     .slice(0, 10);
 
-  const jsonLd = generateJsonLd(post);
+  const jsonLd = buildReviewJsonLd(post);
 
   return (
     <div className="bg-white min-h-screen">
@@ -170,8 +190,8 @@ export default async function PostDetail(props: {
             <p className="text-xl">{post.description}</p>
 
             <div
-              dangerouslySetInnerHTML={{ __html: post.content }}
               className="space-y-6"
+              dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
             {post.product && (
@@ -230,7 +250,9 @@ export default async function PostDetail(props: {
               <MessageSquare className="text-blue-600" />
               Affiliate Disclosure
             </div>
-            <p className="text-xs text-slate-500">{affiliateDisclaimer}</p>
+            <p className="text-xs text-slate-500">
+              {affiliateDisclaimer}
+            </p>
           </div>
         </aside>
       </main>
