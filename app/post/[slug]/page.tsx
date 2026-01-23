@@ -14,17 +14,15 @@ import {
   Share2,
   MessageSquare,
   ChevronRight,
-  LinkIcon,
-  Info,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /* Types */
 /* ------------------------------------------------------------------ */
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+// interface PageProps {
+//   params: Promise<{ slug: string }>;
+// }
 
 /* ------------------------------------------------------------------ */
 /* Metadata */
@@ -117,7 +115,8 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 export default async function PostDetail(props: {
   params: { slug: string };
 }) {
-  const { slug } = props.params;
+  const params = props.params;
+  const slug = params.slug;
   const [post, affiliateDisclaimer] = await Promise.all([
     getPostBySlug(slug),
     getAffiliateDisclaimer(),
