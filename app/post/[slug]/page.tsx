@@ -2,20 +2,21 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  CheckCircle2,
-  Calendar,
-  Share2,
-  MessageSquare,
-  ChevronRight,
-} from "lucide-react";
-
 import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
 import {
   getPostBySlug,
   getPostsByCategory,
   getAffiliateDisclaimer,
 } from "@/lib/posts";
+import {
+  CheckCircle2,
+  Calendar,
+  Share2,
+  MessageSquare,
+  ChevronRight,
+  LinkIcon,
+  Info,
+} from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /* Types */
@@ -58,12 +59,11 @@ export async function generateMetadata(
 /* JSON-LD */
 /* ------------------------------------------------------------------ */
 
-function buildReviewJsonLd(post: Post) {
-  if (!post?.product) return null;
+function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
+  if (!post || !post.product) return null;
 
-  const price = post.product.price
-    ? post.product.price.replace(/[^0-9.]/g, "")
-    : undefined;
+  const price =
+    post.product.price?.replace(/[^0-9.]/g, "") || undefined;
 
   return {
     "@context": "https://schema.org",
@@ -72,12 +72,10 @@ function buildReviewJsonLd(post: Post) {
     description: post.description,
     image: [post.featuredImage],
     datePublished: new Date(post.date).toISOString(),
-
     author: {
       "@type": "Organization",
       name: "SuyoohTech Blog Editorial Team",
     },
-
     publisher: {
       "@type": "Organization",
       name: "SuyoohTech Blog",
@@ -86,15 +84,11 @@ function buildReviewJsonLd(post: Post) {
         url: "https://picsum.photos/id/1/200/200",
       },
     },
-
-    reviewRating: post.product.rating
-      ? {
-          "@type": "Rating",
-          ratingValue: post.product.rating,
-          bestRating: "5",
-        }
-      : undefined,
-
+    reviewRating: post.product.rating && {
+      "@type": "Rating",
+      ratingValue: post.product.rating,
+      bestRating: "5",
+    },
     itemReviewed: {
       "@type": "Product",
       name: post.product.name,
@@ -103,7 +97,6 @@ function buildReviewJsonLd(post: Post) {
         "@type": "Brand",
         name: post.product.brand,
       },
-
       aggregateRating:
         post.product.rating && post.product.ratingCount
           ? {
@@ -112,17 +105,14 @@ function buildReviewJsonLd(post: Post) {
               ratingCount: post.product.ratingCount,
             }
           : undefined,
-
-      offers: post.product.amazonLink
-        ? {
-            "@type": "Offer",
-            url: post.product.amazonLink,
-            price,
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            priceValidUntil: "2026-12-31",
-          }
-        : undefined,
+      offers: post.product.amazonLink && {
+        "@type": "Offer",
+        url: post.product.amazonLink,
+        price,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        priceValidUntil: "2026-12-31",
+      },
     },
   };
 }
@@ -145,7 +135,7 @@ export default async function PostDetail({ params }: RouteParams) {
     .filter((p) => p.id !== post.id)
     .slice(0, 10);
 
-  const jsonLd = buildReviewJsonLd(post);
+  const jsonLd = generateJsonLd(post);
 
   return (
     <div className="bg-white min-h-screen">
@@ -190,8 +180,8 @@ export default async function PostDetail({ params }: RouteParams) {
             <p className="text-xl">{post.description}</p>
 
             <div
-              className="space-y-6"
               dangerouslySetInnerHTML={{ __html: post.content }}
+              className="space-y-6"
             />
 
             {post.product && (
@@ -250,9 +240,7 @@ export default async function PostDetail({ params }: RouteParams) {
               <MessageSquare className="text-blue-600" />
               Affiliate Disclosure
             </div>
-            <p className="text-xs text-slate-500">
-              {affiliateDisclaimer}
-            </p>
+            <p className="text-xs text-slate-500">{affiliateDisclaimer}</p>
           </div>
         </aside>
       </main>
