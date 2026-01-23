@@ -36,6 +36,28 @@ export default async function Home() {
     getTrendingPosts(),
   ]);
 
+  // Handle case where no posts are available (e.g., database not set up)
+  if (posts.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-center p-8">
+          <h1 className="text-3xl font-bold text-slate-900 mb-4">
+            Welcome to SuyoohTech Blog
+          </h1>
+          <p className="text-slate-600 mb-6">
+            No posts available yet. Please check back later or set up the database.
+          </p>
+          <Link
+            href="/deal"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+          >
+            Try Deal Finder
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const featuredPost = posts.find((p) => p.featured) || posts[0];
 
   const postsByCategory = Object.values(Category).reduce((acc, category) => {
