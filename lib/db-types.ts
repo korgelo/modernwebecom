@@ -29,17 +29,6 @@ export interface DbProduct {
   cons: string[];
 }
 
-export interface DbTrendingPost {
-  id: string;
-  title: string;
-  short_title: string;
-  slug: string;
-  description: string;
-  key_insight: string;
-  category: string;
-  cta_text: string;
-}
-
 export interface DbSiteSetting {
   key: string;
   value: string;
@@ -47,8 +36,7 @@ export interface DbSiteSetting {
 
 export function mapDbPostToPost(
   dbPost: DbPost,
-  product?: DbProduct,
-  compareWith?: DbProduct
+  product?: DbProduct
 ): Post {
   return {
     id: dbPost.id,
@@ -61,7 +49,6 @@ export function mapDbPostToPost(
     featuredImage: dbPost.featured_image,
     featured: dbPost.featured,
     product: product ? mapDbProductToProduct(product) : undefined,
-    compareWith: compareWith ? mapDbProductToProduct(compareWith) : undefined,
   };
 }
 
@@ -80,28 +67,3 @@ export function mapDbProductToProduct(dbProduct: DbProduct): Product {
   };
 }
 
-export interface TrendingPost {
-  id: string;
-  title: string;
-  shortTitle: string;
-  slug: string;
-  description: string;
-  keyInsight: string;
-  category: string;
-  ctaText: string;
-}
-
-export function mapDbTrendingPostToTrendingPost(
-  dbTrendingPost: DbTrendingPost
-): TrendingPost {
-  return {
-    id: dbTrendingPost.id,
-    title: dbTrendingPost.title,
-    shortTitle: dbTrendingPost.short_title,
-    slug: dbTrendingPost.slug,
-    description: dbTrendingPost.description,
-    keyInsight: dbTrendingPost.key_insight,
-    category: dbTrendingPost.category,
-    ctaText: dbTrendingPost.cta_text,
-  };
-}

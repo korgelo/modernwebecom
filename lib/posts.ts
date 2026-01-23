@@ -3,11 +3,8 @@ import { query } from "./db";
 import {
   DbPost,
   DbProduct,
-  DbTrendingPost,
   DbSiteSetting,
   mapDbPostToPost,
-  mapDbTrendingPostToTrendingPost,
-  TrendingPost,
 } from "./db-types";
 import { Post, Category } from "@/types";
 
@@ -28,27 +25,15 @@ async function fetchAllPostsFromDb(): Promise<Post[]> {
       FROM products
     `);
 
-    const compareProducts = await query<DbProduct>(`
-      SELECT id, post_id, name, brand, price, rating, amazon_link, 
-             image_url, specs, pros, cons
-      FROM compare_products
-    `);
-
     const productMap = new Map<string, DbProduct>();
     for (const product of products) {
       productMap.set(product.post_id, product);
     }
 
-    const compareProductMap = new Map<string, DbProduct>();
-    for (const product of compareProducts) {
-      compareProductMap.set(product.post_id, product);
-    }
-
     return posts.map((post) =>
       mapDbPostToPost(
         post,
-        productMap.get(post.id),
-        compareProductMap.get(post.id)
+        productMap.get(post.id)
       )
     );
   } catch (error) {
@@ -85,17 +70,9 @@ async function fetchPostBySlugFromDb(slug: string): Promise<Post | null> {
       [post.id]
     );
 
-    const compareProducts = await query<DbProduct>(
-      `SELECT id, post_id, name, brand, price, rating, amazon_link, 
-              image_url, specs, pros, cons
-       FROM compare_products WHERE post_id = $1`,
-      [post.id]
-    );
-
     return mapDbPostToPost(
       post,
-      products[0] || undefined,
-      compareProducts[0] || undefined
+      products[0] || undefined
     );
   } catch (error) {
     console.warn(`Failed to fetch post by slug "${slug}":`, error);
@@ -131,28 +108,15 @@ async function fetchPostsByCategoryFromDb(category: Category): Promise<Post[]> {
       [postIds]
     );
 
-    const compareProducts = await query<DbProduct>(
-      `SELECT id, post_id, name, brand, price, rating, amazon_link, 
-              image_url, specs, pros, cons
-       FROM compare_products WHERE post_id = ANY($1)`,
-      [postIds]
-    );
-
     const productMap = new Map<string, DbProduct>();
     for (const product of products) {
       productMap.set(product.post_id, product);
     }
 
-    const compareProductMap = new Map<string, DbProduct>();
-    for (const product of compareProducts) {
-      compareProductMap.set(product.post_id, product);
-    }
-
     return posts.map((post) =>
       mapDbPostToPost(
         post,
-        productMap.get(post.id),
-        compareProductMap.get(post.id)
+        productMap.get(post.id)
       )
     );
   } catch (error) {
@@ -220,17 +184,7 @@ export const getFeaturedPost = unstable_cache(
 );
 
 async function fetchTrendingPostsFromDb(): Promise<TrendingPost[]> {
-  try {
-    const trendingPosts = await query<DbTrendingPost>(`
-      SELECT id, title, short_title, slug, description, key_insight, category, cta_text
-      FROM trending_posts
-      ORDER BY id
-    `);
-    return trendingPosts.map(mapDbTrendingPostToTrendingPost);
-  } catch (error) {
-    console.warn("Failed to fetch trending posts:", error);
-    return [];
-  }
+  return [];
 }
 
 export const getTrendingPosts = unstable_cache(
@@ -247,9 +201,17 @@ async function fetchSiteSettingFromDb(key: string): Promise<string | null> {
     );
     return settings.length > 0 ? settings[0].value : null;
   } catch (error) {
-    // Return null if table doesn't exist or query fails
-    // This allows the app to use default values during build
-    console.warn(`Failed to fetch site setting "${key}":`, error);
+    if (
+      error instanceof Error &&
+      error.message.includes('relation "site_settings" does not exist')
+    ) {
+      console.warn(`'site_settings' table not found, using default values.`);
+      return null;
+    }
+    console.error(
+      `Failed to fetch site setting "${key}" for another reason:`,
+      error
+    );
     return null;
   }
 }
