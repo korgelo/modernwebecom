@@ -20,31 +20,31 @@ import {
 /* Types */
 /* ------------------------------------------------------------------ */
 
-// interface PageProps {
-//   params: Promise<{ slug: string }>;
-// }
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
 /* ------------------------------------------------------------------ */
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
-// export async function generateMetadata(
-//   { params }: { params: { slug: string } }
-// ): Promise<Metadata> {
-//   const post = await getPostBySlug(params.slug);
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
+  const post = await getPostBySlug(params.slug);
 
-//   if (!post) {
-//     return { title: "Review Not Found | SuyoohTech Blog" };
-//   }
+  if (!post) {
+    return { title: "Review Not Found | SuyoohTech Blog" };
+  }
 
-//   return {
-//     title: `${post.title} | SuyoohTech Blog`,
-//     description: post.description,
-//     alternates: {
-//       canonical: `https://www.suyooh.com/post/${post.slug}`,
-//     },
-//   };
-// }
+  return {
+    title: `${post.title} | SuyoohTech Blog`,
+    description: post.description,
+    alternates: {
+      canonical: `https://www.suyooh.com/post/${post.slug}`,
+    },
+  };
+}
 
 /* ------------------------------------------------------------------ */
 /* JSON-LD */
@@ -111,10 +111,6 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* ------------------------------------------------------------------ */
 /* Page */
 /* ------------------------------------------------------------------ */
-
-// interface PageProps {
-//   params: Promise<{ slug: string }>;
-// }
 
 export default async function PostDetail(props: {
   params: Promise<{ slug: string }>;
