@@ -115,7 +115,7 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 export default async function PostDetail(props: {
   params: { slug: string };
 }) {
-  const params = props.params;
+  const params = await props.params;
   const slug = params.slug;
   const [post, affiliateDisclaimer] = await Promise.all([
     getPostBySlug(slug),
