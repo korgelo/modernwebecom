@@ -23,7 +23,7 @@ import {
 /* ------------------------------------------------------------------ */
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 /* ------------------------------------------------------------------ */
@@ -115,8 +115,11 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* ------------------------------------------------------------------ */
 
 export default async function PostDetail({ params }: PageProps) {
+  // HACK: The `params` prop is typed as a Promise to resolve a Vercel build error.
+  // This is a workaround for a likely issue in the build environment.
+  const { slug } = await params;
   const [post, affiliateDisclaimer] = await Promise.all([
-    getPostBySlug(params.slug),
+    getPostBySlug(slug),
     getAffiliateDisclaimer(),
   ]);
 
