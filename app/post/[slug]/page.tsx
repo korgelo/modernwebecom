@@ -30,23 +30,23 @@ interface PageProps {
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } }
-): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+// export async function generateMetadata(
+//   { params }: { params: { slug: string } }
+// ): Promise<Metadata> {
+//   const post = await getPostBySlug(params.slug);
 
-  if (!post) {
-    return { title: "Review Not Found | SuyoohTech Blog" };
-  }
+//   if (!post) {
+//     return { title: "Review Not Found | SuyoohTech Blog" };
+//   }
 
-  return {
-    title: `${post.title} | SuyoohTech Blog`,
-    description: post.description,
-    alternates: {
-      canonical: `https://www.suyooh.com/post/${post.slug}`,
-    },
-  };
-}
+//   return {
+//     title: `${post.title} | SuyoohTech Blog`,
+//     description: post.description,
+//     alternates: {
+//       canonical: `https://www.suyooh.com/post/${post.slug}`,
+//     },
+//   };
+// }
 
 /* ------------------------------------------------------------------ */
 /* JSON-LD */
@@ -114,10 +114,11 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* Page */
 /* ------------------------------------------------------------------ */
 
-export default async function PostDetail({ params }: PageProps) {
-  // HACK: The `params` prop is typed as a Promise to resolve a Vercel build error.
-  // This is a workaround for a likely issue in the build environment.
-  const { slug } = await params;
+export default async function PostDetail(props: {
+  params: { slug: string };
+}) {
+  const params = props.params;
+  const slug = params.slug;
   const [post, affiliateDisclaimer] = await Promise.all([
     getPostBySlug(slug),
     getAffiliateDisclaimer(),
