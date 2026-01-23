@@ -117,7 +117,7 @@ interface PageParams {
 }
 
 export default async function PostDetail({ params }: PageParams) {
-  const { slug } = await params;
+  const { slug } = await Promise.resolve(params);
   const [post, affiliateDisclaimer] = await Promise.all([
     getPostBySlug(slug),
     getAffiliateDisclaimer(),
