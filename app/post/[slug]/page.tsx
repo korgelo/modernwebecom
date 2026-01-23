@@ -19,19 +19,11 @@ import {
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
-/* Types */
-/* ------------------------------------------------------------------ */
-
-interface PageProps {
-  params: { slug: string };
-}
-
-/* ------------------------------------------------------------------ */
 /* Metadata */
 /* ------------------------------------------------------------------ */
 
 export async function generateMetadata(
-  { params }: PageProps
+  { params }: { params: { slug: string } }
 ): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
 
@@ -114,7 +106,11 @@ function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
 /* Page */
 /* ------------------------------------------------------------------ */
 
-export default async function PostDetail({ params }: PageProps) {
+export default async function PostDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const [post, affiliateDisclaimer] = await Promise.all([
     getPostBySlug(params.slug),
     getAffiliateDisclaimer(),
