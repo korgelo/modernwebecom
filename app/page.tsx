@@ -1,7 +1,7 @@
 import React from "react";
 import { getAllPosts, getPostCountByCategory } from "@/lib/posts";
 import BlogCard from "@/components/BlogCard";
-import { ArrowRight, Zap, TrendingUp, Award } from "lucide-react";
+import { ArrowRight, Zap, Award } from "lucide-react";
 import Link from "next/link";
 import { Category, Post } from "@/types";
 
