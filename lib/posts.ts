@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { query } from "./db";
-import { DbPost, DbProduct, DbSiteSetting, mapDbPostToPost } from "./db-types";
+import { DbPost, DbProduct, mapDbPostToPost } from "./db-types";
 import { Post, Category } from "@/types";
 
 const CACHE_REVALIDATE_SECONDS = 60;
@@ -164,47 +164,6 @@ export const getFeaturedPost = unstable_cache(
   { revalidate: CACHE_REVALIDATE_SECONDS, tags: ["posts"] }
 );
 
-async function fetchSiteSettingFromDb(key: string): Promise<string | null> {
-  try {
-    const settings = await query<DbSiteSetting>(
-      `SELECT key, value FROM site_settings WHERE key = $1`,
-      [key]
-    );
-    return settings.length > 0 ? settings[0].value : null;
-  } catch (error) {
-    if (
-      error instanceof Error &&
-      error.message.includes('relation "site_settings" does not exist')
-    ) {
-      console.warn(`'site_settings' table not found, using default values.`);
-      return null;
-    }
-    console.error(
-      `Failed to fetch site setting "${key}" for another reason:`,
-      error
-    );
-    return null;
-  }
-}
-
-export const getSiteSetting = unstable_cache(
-  fetchSiteSettingFromDb,
-  ["site-setting"],
-  { revalidate: CACHE_REVALIDATE_SECONDS * 10, tags: ["settings"] }
-);
-
-export async function getSiteName(): Promise<string> {
-  const name = await getSiteSetting("SITE_NAME");
-  return name || "SuyoohTechBlog";
-}
-
-export async function getAffiliateDisclaimer(): Promise<string> {
-  const disclaimer = await getSiteSetting("AFFILIATE_DISCLAIMER");
-  return (
-    disclaimer ||
-    "SuyoohTechBlog is supported by its audience. When you purchase through links on our site, we may earn an affiliate commission at no extra cost to you."
-  );
-}
 
 export async function getPostCountByCategory(
   category: Category
