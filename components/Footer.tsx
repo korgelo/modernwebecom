@@ -1,13 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { Monitor } from "lucide-react";
-import { getSiteName, getAffiliateDisclaimer } from "@/lib/posts";
 
-const Footer = async () => {
-  const [siteName, affiliateDisclaimer] = await Promise.all([
-    getSiteName(),
-    getAffiliateDisclaimer(),
-  ]);
+const Footer = () => {
+  const siteName = "SuyoohTechBlog";
+  const affiliateDisclaimer =
+    "SuyoohTechBlog is supported by its audience. When you purchase through links on our site, we may earn an affiliate commission at no extra cost to you.";
 
   return (
     <footer className="bg-slate-900 text-slate-300">

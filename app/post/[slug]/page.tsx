@@ -6,7 +6,6 @@ import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
 import {
   getPostBySlug,
   getPostsByCategory,
-  getAffiliateDisclaimer,
 } from "@/lib/posts";
 import {
   CheckCircle2,
@@ -109,10 +108,9 @@ export default async function PostDetail(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const [post, affiliateDisclaimer] = await Promise.all([
-    getPostBySlug(slug),
-    getAffiliateDisclaimer(),
-  ]);
+  const post = await getPostBySlug(slug);
+  const affiliateDisclaimer =
+    "SuyoohTechBlog is supported by its audience. When you purchase through links on our site, we may earn an affiliate commission at no extra cost to you.";
 
   if (!post) notFound();
 
