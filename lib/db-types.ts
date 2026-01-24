@@ -29,10 +29,6 @@ export interface DbProduct {
   cons: string[];
 }
 
-export interface DbSiteSetting {
-  key: string;
-  value: string;
-}
 
 export function mapDbPostToPost(
   dbPost: DbPost,

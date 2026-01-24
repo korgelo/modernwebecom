@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Category } from "@/types";
-import { getSiteName, getPostCountByCategory } from "@/lib/posts";
+import { getPostCountByCategory } from "@/lib/posts";
 
 const slugToCategoryMap: Record<string, Category> = {
   "audio-devices": Category.AUDIO_DEVICES,
@@ -20,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ cat: string }>;
 }): Promise<Metadata> {
   const { cat } = (await params) || { cat: undefined };
-  const siteName = await getSiteName();
+  const siteName = "SuyoohTechBlog";
 
   const category = cat
     ? slugToCategoryMap[cat] ||
