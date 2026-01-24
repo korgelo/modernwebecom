@@ -1,7 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { NextResponse } from "next/server";
 import { extractDataFromJson, extractSources } from "@/utils/helpers";
-import { ProductListing, FormInputs } from "@/types";
 
 export async function POST(req: Request) {
   try {
@@ -106,5 +105,3 @@ export async function POST(req: Request) {
     );
   }
 }
-// NOTE: `scrapeAndGenerateListing` was moved to a dedicated API route
-// at app/api/gemini/scrape/route.ts to comply with Next.js route export types.

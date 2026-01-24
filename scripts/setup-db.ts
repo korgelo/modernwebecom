@@ -1,7 +1,4 @@
 import { neon } from "@neondatabase/serverless";
-import { config } from "dotenv";
-
-config();
 
 const connectionString = process.env.DATABASE_URL;
 if (!connectionString) {

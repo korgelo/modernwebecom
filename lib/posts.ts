@@ -1,11 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { query } from "./db";
-import {
-  DbPost,
-  DbProduct,
-  DbSiteSetting,
-  mapDbPostToPost,
-} from "./db-types";
+import { DbPost, DbProduct, DbSiteSetting, mapDbPostToPost } from "./db-types";
 import { Post, Category } from "@/types";
 
 const CACHE_REVALIDATE_SECONDS = 60;
@@ -30,23 +25,17 @@ async function fetchAllPostsFromDb(): Promise<Post[]> {
       productMap.set(product.post_id, product);
     }
 
-    return posts.map((post) =>
-      mapDbPostToPost(
-        post,
-        productMap.get(post.id)
-      )
-    );
+    return posts.map((post) => mapDbPostToPost(post, productMap.get(post.id)));
   } catch (error) {
     console.warn("Failed to fetch all posts:", error);
     return [];
   }
 }
 
-export const getAllPosts = unstable_cache(
-  fetchAllPostsFromDb,
-  ["all-posts"],
-  { revalidate: CACHE_REVALIDATE_SECONDS, tags: ["posts"] }
-);
+export const getAllPosts = unstable_cache(fetchAllPostsFromDb, ["all-posts"], {
+  revalidate: CACHE_REVALIDATE_SECONDS,
+  tags: ["posts"],
+});
 
 async function fetchPostBySlugFromDb(slug: string): Promise<Post | null> {
   try {
@@ -70,10 +59,7 @@ async function fetchPostBySlugFromDb(slug: string): Promise<Post | null> {
       [post.id]
     );
 
-    return mapDbPostToPost(
-      post,
-      products[0] || undefined
-    );
+    return mapDbPostToPost(post, products[0] || undefined);
   } catch (error) {
     console.warn(`Failed to fetch post by slug "${slug}":`, error);
     return null;
@@ -113,12 +99,7 @@ async function fetchPostsByCategoryFromDb(category: Category): Promise<Post[]> {
       productMap.set(product.post_id, product);
     }
 
-    return posts.map((post) =>
-      mapDbPostToPost(
-        post,
-        productMap.get(post.id)
-      )
-    );
+    return posts.map((post) => mapDbPostToPost(post, productMap.get(post.id)));
   } catch (error) {
     console.warn(`Failed to fetch posts by category "${category}":`, error);
     return [];
@@ -181,16 +162,6 @@ export const getFeaturedPost = unstable_cache(
   fetchFeaturedPostFromDb,
   ["featured-post"],
   { revalidate: CACHE_REVALIDATE_SECONDS, tags: ["posts"] }
-);
-
-async function fetchTrendingPostsFromDb(): Promise<TrendingPost[]> {
-  return [];
-}
-
-export const getTrendingPosts = unstable_cache(
-  fetchTrendingPostsFromDb,
-  ["trending-posts"],
-  { revalidate: CACHE_REVALIDATE_SECONDS, tags: ["trending"] }
 );
 
 async function fetchSiteSettingFromDb(key: string): Promise<string | null> {

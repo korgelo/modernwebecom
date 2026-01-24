@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  getAllPosts,
-  getTrendingPosts,
-  getPostCountByCategory,
-} from "@/lib/posts";
+import { getAllPosts, getPostCountByCategory } from "@/lib/posts";
 import BlogCard from "@/components/BlogCard";
 import { ArrowRight, Zap, TrendingUp, Award } from "lucide-react";
 import Link from "next/link";
@@ -31,10 +27,7 @@ const CATEGORIES = Object.values(Category).map((slug) => ({
 }));
 
 export default async function Home() {
-  const [posts, trendingPosts] = await Promise.all([
-    getAllPosts(),
-    getTrendingPosts(),
-  ]);
+  const [posts] = await Promise.all([getAllPosts()]);
 
   // Handle case where no posts are available (e.g., database not set up)
   if (posts.length === 0) {
@@ -45,7 +38,8 @@ export default async function Home() {
             Welcome to SuyoohTech Blog
           </h1>
           <p className="text-slate-600 mb-6">
-            No posts available yet. Please check back later or set up the database.
+            No posts available yet. Please check back later or set up the
+            database.
           </p>
           <Link
             href="/deal"
@@ -60,12 +54,15 @@ export default async function Home() {
 
   const featuredPost = posts.find((p) => p.featured) || posts[0];
 
-  const postsByCategory = Object.values(Category).reduce((acc, category) => {
-    acc[category] = posts
-      .filter((post) => post.category === category)
-      .slice(0, 6);
-    return acc;
-  }, {} as Record<Category, Post[]>);
+  const postsByCategory = Object.values(Category).reduce(
+    (acc, category) => {
+      acc[category] = posts
+        .filter((post) => post.category === category)
+        .slice(0, 6);
+      return acc;
+    },
+    {} as Record<Category, Post[]>
+  );
 
   const categoryCounts = await Promise.all(
     CATEGORIES.map(async (cat) => ({
@@ -147,26 +144,6 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trending / Category Quick Nav */}
-      <section className="bg-white border-b border-slate-200 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
-            <span className="text-xs font-bold text-slate-400 uppercase flex items-center gap-2 flex-shrink-0">
-              <TrendingUp size={16} className="text-rose-500" /> Trending Now:
-            </span>
-            {trendingPosts.map((cat) => (
-              <Link
-                href={`/`}
-                key={cat.slug}
-                className="whitespace-nowrap bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
-              >
-                {cat.shortTitle}
-              </Link>
-            ))}
           </div>
         </div>
       </section>
