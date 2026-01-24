@@ -8,15 +8,15 @@ import { Category, Post } from "@/types";
 const CATEGORY_META: Record<Category, { name: string; image: string }> = {
   [Category.AUDIO_DEVICES]: {
     name: "Headset",
-    image: "/assets/images/audio/Beats-Solo-4-Wireless-Headphones.jpg",
+    image: "/assets/images/posts/Beats-Solo-4-Wireless-Headphones.jpg",
   },
   [Category.LAPTOP_PC]: {
     name: "Laptops",
-    image: "/assets/images/pc/lenovo-slim-3i-chromebook-14-review.jpg",
+    image: "/assets/images/posts/lenovo-slim-3i-chromebook-14-review.jpg",
   },
   [Category.SMARTWATCH]: {
     name: "Smartwatch",
-    image: "/assets/images/smartwatch/samsung-galaxy-watch-7-40mm-review.jpg",
+    image: "/assets/images/posts/samsung-galaxy-watch-7-40mm-review.jpg",
   },
 };
 
