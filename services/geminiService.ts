@@ -1,4 +1,4 @@
-import { SearchResult, ProductListing, FormInputs } from "@/types";
+import { SearchResult, ProductListing } from "@/types";
 
 export const saveListing = async (
   listing: ProductListing
@@ -28,22 +28,6 @@ export const generateIntegratedMarketReport = async (
 
   if (!res.ok) {
     throw new Error("Failed to generate market report");
-  }
-
-  return res.json();
-};
-
-export const scrapeAndGenerateListing = async (
-  inputs: FormInputs
-): Promise<Partial<ProductListing>> => {
-  const res = await fetch("/api/gemini/scrape", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(inputs),
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to generate listing");
   }
 
   return res.json();
