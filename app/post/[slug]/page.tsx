@@ -173,12 +173,12 @@ export default async function PostDetail(props: {
               </>
             )}
 
-            {post.product && post.compareWiths && (
+            {post.product && post.compareWith && (
               <>
                 <h2 className="mt-16">Expert Comparison</h2>
                 <ComparisonTable
                   productA={post.product}
-                  productB={post.compareWiths}
+                  productB={post.compareWith}
                 />
               </>
             )}
