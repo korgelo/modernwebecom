@@ -33,7 +33,7 @@ export interface Post {
   featuredImage: string;
   featured?: boolean;
   product?: Product;
-  compareWith?: Product;
+  compareWiths?: Product;
 }
 
 // DealFinder

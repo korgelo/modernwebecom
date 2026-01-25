@@ -3,10 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { AffiliateCTA, ComparisonTable } from "@/components/ReviewUI";
-import {
-  getPostBySlug,
-  getPostsByCategory,
-} from "@/lib/posts";
+import { getPostBySlug, getPostsByCategory } from "@/lib/posts";
 import {
   CheckCircle2,
   Calendar,
@@ -20,8 +17,8 @@ import {
 /* ------------------------------------------------------------------ */
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;}
-): Promise<Metadata> {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await props.params;
   const post = await getPostBySlug(slug);
 
@@ -45,8 +42,7 @@ export async function generateMetadata(props: {
 function generateJsonLd(post: Awaited<ReturnType<typeof getPostBySlug>>) {
   if (!post || !post.product) return null;
 
-  const price =
-    post.product.price?.replace(/[^0-9.]/g, "") || undefined;
+  const price = post.product.price?.replace(/[^0-9.]/g, "") || undefined;
 
   return {
     "@context": "https://schema.org",
@@ -177,12 +173,12 @@ export default async function PostDetail(props: {
               </>
             )}
 
-            {post.product && post.compareWith && (
+            {post.product && post.compareWiths && (
               <>
                 <h2 className="mt-16">Expert Comparison</h2>
                 <ComparisonTable
                   productA={post.product}
-                  productB={post.compareWith}
+                  productB={post.compareWiths}
                 />
               </>
             )}
