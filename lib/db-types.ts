@@ -29,10 +29,10 @@ export interface DbProduct {
   cons: string[];
 }
 
-
 export function mapDbPostToPost(
   dbPost: DbPost,
-  product?: DbProduct
+  product?: DbProduct,
+  compareWith?: DbProduct
 ): Post {
   return {
     id: dbPost.id,
@@ -45,6 +45,7 @@ export function mapDbPostToPost(
     featuredImage: dbPost.featured_image,
     featured: dbPost.featured,
     product: product ? mapDbProductToProduct(product) : undefined,
+    compareWith: compareWith ? mapDbProductToProduct(compareWith) : undefined,
   };
 }
 
@@ -62,4 +63,3 @@ export function mapDbProductToProduct(dbProduct: DbProduct): Product {
     imageUrl: dbProduct.image_url,
   };
 }
-
