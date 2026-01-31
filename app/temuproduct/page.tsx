@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { getAllPosts } from "@/lib/posts";
+import { getAllPosts } from "@/lib/temuposts";
 import { ArrowRight } from "lucide-react";
 import ProductPagination from "@/components/ProductPagination";
 
@@ -34,7 +34,7 @@ const ProductPage = async () => {
               </Link>
             </div>
 
-            <ProductPagination posts={sortedPosts} />
+            <ProductPagination temuposts={sortedPosts} />
           </main>
         </div>
       </div>

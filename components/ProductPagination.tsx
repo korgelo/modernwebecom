@@ -1,15 +1,23 @@
 "use client";
 import React from 'react';
-import { Post } from "@/types";
+import { Post, temuPost } from "@/types";
 import BlogCard from "@/components/BlogCard";
 
 interface ProductPaginationProps {
-  posts: Post[];
+  posts: (Post | temuPost)[];
 }
 
-const ProductPagination: React.FC<ProductPaginationProps> = ({ posts }) => {
+const ProductPagination: React.FC<ProductPaginationProps> = ({ posts = [] }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const postsPerPage = 6;
+
+  if (!posts || posts.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-slate-500">No products found.</p>
+      </div>
+    );
+  }
 
   // Pagination logic
   const indexOfLastPost = currentPage * postsPerPage;

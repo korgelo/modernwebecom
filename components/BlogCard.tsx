@@ -1,10 +1,10 @@
 import React from "react";
-import { Post } from "@/types";
+import { Post, temuPost } from "@/types";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 
 interface BlogCardProps {
-  post: Post;
+  post: Post | temuPost;
   horizontal?: boolean;
 }
 

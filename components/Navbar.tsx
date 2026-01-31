@@ -51,7 +51,13 @@ const Navbar: React.FC = () => {
                 href="/product"
                 className="text-slate-600 hover:text-blue-600 inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors"
               >
-                All product list
+                Amazon
+              </Link>
+              <Link
+                href="/temuproduct"
+                className="text-slate-600 hover:text-blue-600 inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors"
+              >
+                Temu
               </Link>
               {categories.slice(0, 3).map((cat) => (
                 <Link
@@ -105,16 +111,16 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 pb-4">
           <div className="pt-2 pb-3 space-y-1">
-            
+
             <Link
-                href="/product"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50"
-              >
-                <List size={24} />
-                All product list
-              </Link>
-              
+              href="/product"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50"
+            >
+              <List size={24} />
+              All product list
+            </Link>
+
             {categories.map((cat) => (
               <Link
                 key={cat.name}
