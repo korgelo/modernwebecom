@@ -36,6 +36,35 @@ export interface Post {
   compareWith?: Product;
 }
 
+// TemuPosts
+
+export interface temuProduct {
+  name: string;
+  brand: string;
+  price: string;
+  rating: number;
+  ratingCount: number;
+  specs: ProductSpec[];
+  pros: string[];
+  cons: string[];
+  temuLink: string;
+  imageUrl: string;
+}
+
+export interface temuPost {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  category: Category;
+  date: string;
+  featuredImage: string;
+  featured?: boolean;
+  product?: temuProduct;
+  compareWith?: Product;
+}
+
 // DealFinder
 
 export interface Supplier {
@@ -97,55 +126,4 @@ export interface SavedReport {
   niche: string;
   timestamp: number;
   data: SearchResult;
-}
-
-// Scraper
-
-export interface ProductSpec {
-  label: string;
-  value: string;
-}
-export interface ProductDetails {
-  name: string;
-  brand: string;
-  price: string; // String with $ sign
-  rating: number;
-  specs: ProductSpec[];
-  pros: string[];
-  cons: string[];
-  amazonLink: string;
-  imageUrl: string;
-}
-
-export interface ProductListing {
-  id: string; // Amazon ASIN
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  featuredImage: string; // New field for blog post assets
-  content: string;
-  product: ProductDetails;
-
-  // Internal tracking fields for the UI
-  internalId: string;
-  sourceLink: string;
-  timestamp: number;
-  originalPrice: number;
-  reviews: number;
-  isSaved?: boolean;
-}
-
-export interface FormInputs {
-  sourceLink: string;
-  amazonLink: string;
-  imageUrl: string;
-}
-
-export enum GenerationStatus {
-  IDLE = "IDLE",
-  LOADING = "LOADING",
-  SUCCESS = "SUCCESS",
-  ERROR = "ERROR",
 }

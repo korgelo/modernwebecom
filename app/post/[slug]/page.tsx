@@ -125,10 +125,10 @@ export default async function PostDetail(props: {
         />
       )}
 
-      {/* Header */}
-      <header className="bg-slate-50 border-b pt-12 pb-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <nav className="flex items-center gap-2 text-xs font-bold uppercase mb-8 text-slate-400">
+      {/* Article Header */}
+      <header className="bg-slate-50 border-b border-slate-200 pt-12 pb-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">
             <Link href="/" className="hover:text-blue-600">
               Home
             </Link>
@@ -136,11 +136,15 @@ export default async function PostDetail(props: {
             <span className="text-slate-900">{post.category}</span>
           </nav>
 
-          <h1 className="text-4xl font-black mb-6">{post.title}</h1>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mb-8">
+            {post.title}
+          </h1>
 
-          <div className="flex items-center gap-2 text-xs text-slate-500">
-            <Calendar size={14} />
-            Published {post.date}
+          <div className="flex flex-wrap items-center justify-start gap-8">
+            <div className="flex items-center gap-2 text-slate-500 text-xs">
+              <Calendar size={14} />
+              <span>Published {post.date}</span>
+            </div>
           </div>
         </div>
       </header>
@@ -156,12 +160,14 @@ export default async function PostDetail(props: {
           />
 
           <div className="prose prose-xl max-w-none">
-            <p className="text-xl">{post.description}</p>
+            <p className="text-xl leading-relaxed text-slate-600 font-medium mb-8">
+                {post.description}
+              </p>
 
             <div
-              dangerouslySetInnerHTML={{ __html: post.content }}
-              className="space-y-6"
-            />
+                dangerouslySetInnerHTML={{ __html: post.content }}
+                className="rich-content space-y-6 text-slate-800 leading-loose"
+              />
 
             {post.product && (
               <>

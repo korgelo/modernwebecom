@@ -6,24 +6,24 @@ import { Post, Category } from "@/types";
 const CACHE_REVALIDATE_SECONDS = 60;
 
 async function fetchAllPostsFromDb(): Promise<Post[]> {
-  const posts = await query<DbPost>(`
+  const [posts, products, compareProducts] = await Promise.all([
+    query<DbPost>(`
     SELECT id, slug, title, description, content, category, date, 
            featured_image, featured, created_at, updated_at
     FROM posts
     ORDER BY created_at DESC
-  `);
-
-  const products = await query<DbProduct>(`
+  `),
+    query<DbProduct>(`
     SELECT id, post_id, name, brand, price, rating, amazon_link, 
            image_url, specs, pros, cons
     FROM products
-  `);
-
-  const compareProducts = await query<DbProduct>(`
+  `),
+    query<DbProduct>(`
     SELECT id, post_id, name, brand, price, rating, amazon_link, 
            image_url, specs, pros, cons
     FROM compare_products
-  `);
+  `),
+  ]);
 
   const productMap = new Map<string, DbProduct>();
   for (const product of products) {
@@ -63,19 +63,20 @@ async function fetchPostBySlugFromDb(slug: string): Promise<Post | null> {
 
   const post = posts[0];
 
-  const products = await query<DbProduct>(
-    `SELECT id, post_id, name, brand, price, rating, amazon_link, 
+  const [products, compareProducts] = await Promise.all([
+    query<DbProduct>(
+      `SELECT id, post_id, name, brand, price, rating, amazon_link, 
             image_url, specs, pros, cons
      FROM products WHERE post_id = $1`,
-    [post.id]
-  );
-
-  const compareProducts = await query<DbProduct>(
-    `SELECT id, post_id, name, brand, price, rating, amazon_link, 
+      [post.id]
+    ),
+    query<DbProduct>(
+      `SELECT id, post_id, name, brand, price, rating, amazon_link, 
             image_url, specs, pros, cons
      FROM compare_products WHERE post_id = $1`,
-    [post.id]
-  );
+      [post.id]
+    ),
+  ]);
 
   return mapDbPostToPost(
     post,
@@ -104,19 +105,20 @@ async function fetchPostsByCategoryFromDb(category: Category): Promise<Post[]> {
     return [];
   }
 
-  const products = await query<DbProduct>(
-    `SELECT id, post_id, name, brand, price, rating, amazon_link, 
+  const [products, compareProducts] = await Promise.all([
+    query<DbProduct>(
+      `SELECT id, post_id, name, brand, price, rating, amazon_link, 
             image_url, specs, pros, cons
      FROM products WHERE post_id = ANY($1)`,
-    [postIds]
-  );
-
-  const compareProducts = await query<DbProduct>(
-    `SELECT id, post_id, name, brand, price, rating, amazon_link, 
+      [postIds]
+    ),
+    query<DbProduct>(
+      `SELECT id, post_id, name, brand, price, rating, amazon_link, 
             image_url, specs, pros, cons
      FROM compare_products WHERE post_id = ANY($1)`,
-    [postIds]
-  );
+      [postIds]
+    ),
+  ]);
 
   const productMap = new Map<string, DbProduct>();
   for (const product of products) {
