@@ -202,7 +202,7 @@ export default async function PostDetail(props: {
             {relatedPosts.map((p) => (
               <Link
                 key={p.id}
-                href={`/post/${p.slug}`}
+                href={`/temupost/${p.slug}`}
                 className="flex gap-4 mb-4 group"
               >
                 <img
