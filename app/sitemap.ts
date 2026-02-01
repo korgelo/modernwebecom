@@ -1,11 +1,21 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/posts";
+import { getAllPosts as getAllTemuPosts } from "@/lib/temuposts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const allPosts = await getAllPosts();
+  const [allPosts, allTemuPosts] = await Promise.all([
+    getAllPosts(),
+    getAllTemuPosts(),
+  ]);
 
   const posts = allPosts.map((post) => ({
     url: `${"https://www.suyooh.com"}/post/${post.slug}`,
+    lastModified: new Date(post.date),
+    priority: 0.8,
+  }));
+
+  const temuPosts = allTemuPosts.map((post) => ({
+    url: `${"https://www.suyooh.com"}/temupost/${post.slug}`,
     lastModified: new Date(post.date),
     priority: 0.8,
   }));
@@ -26,6 +36,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       priority: 0.7,
     },
+    {
+      url: `${"https://www.suyooh.com"}/temuproduct`,
+      lastModified: new Date(),
+      priority: 0.7,
+    },
         {
       url: `${"https://www.suyooh.com"}/category/laptops`,
       lastModified: new Date(),
@@ -43,5 +58,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...staticPages, ...posts];
+  return [...staticPages, ...posts, ...temuPosts];
 }
