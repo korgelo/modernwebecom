@@ -1,21 +1,4 @@
-import { SearchResult, ProductListing } from "@/types";
-
-export const saveListing = async (
-  listing: ProductListing
-): Promise<ProductListing> => {
-  const res = await fetch("/api/listings", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(listing),
-  });
-
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.error || "Failed to save listing");
-  }
-
-  return res.json();
-};
+import { SearchResult } from "@/types";
 
 export const generateIntegratedMarketReport = async (
   niche: string
