@@ -6,13 +6,14 @@ import { ArrowRight, Star } from "lucide-react";
 interface BlogCardProps {
   post: Post | temuPost;
   horizontal?: boolean;
+  basePath?: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post, horizontal = false }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ post, horizontal = false, basePath = "/post" }) => {
   if (horizontal) {
     return (
       <Link
-        href={`/post/${post.slug}`}
+        href={`${basePath}/${post.slug}`}
         className="group flex flex-col sm:flex-row gap-6 bg-white p-4 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all"
       >
         <div className="sm:w-2/5 aspect-[16/10] overflow-hidden rounded-xl">
@@ -42,7 +43,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, horizontal = false }) => {
   return (
     <div className="group bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300">
       <Link
-        href={`/post/${post.slug}`}
+        href={`${basePath}/${post.slug}`}
         className="relative aspect-[16/9] overflow-hidden"
       >
         <img
@@ -65,7 +66,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, horizontal = false }) => {
         <div className="flex items-center gap-3 text-xs text-slate-400 mb-3">
           <span>{post.date}</span>
         </div>
-        <Link href={`/post/${post.slug}`} className="block">
+        <Link href={`${basePath}/${post.slug}`} className="block">
           <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-3 leading-tight">
             {post.title}
           </h3>
@@ -75,7 +76,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, horizontal = false }) => {
         </p>
         <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-end">
           <Link
-            href={`/post/${post.slug}`}
+            href={`${basePath}/${post.slug}`}
             className="text-blue-600 hover:text-blue-700 font-bold text-xs flex items-center gap-1"
           >
             Read Review <ArrowRight size={14} />

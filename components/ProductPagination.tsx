@@ -5,9 +5,10 @@ import BlogCard from "@/components/BlogCard";
 
 interface ProductPaginationProps {
   posts: (Post | temuPost)[];
+  basePath?: string;
 }
 
-const ProductPagination: React.FC<ProductPaginationProps> = ({ posts = [] }) => {
+const ProductPagination: React.FC<ProductPaginationProps> = ({ posts = [], basePath }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const postsPerPage = 6;
 
@@ -31,7 +32,7 @@ const ProductPagination: React.FC<ProductPaginationProps> = ({ posts = [] }) => 
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {currentPosts.map((post) => (
-          <BlogCard key={post.id} post={post} />
+          <BlogCard key={post.id} post={post} basePath={basePath} />
         ))}
       </div>
 

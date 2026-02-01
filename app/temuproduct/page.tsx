@@ -34,7 +34,7 @@ const ProductPage = async () => {
               </Link>
             </div>
 
-            <ProductPagination temuposts={sortedPosts} />
+            <ProductPagination posts={sortedPosts} basePath="/temupost" />
           </main>
         </div>
       </div>
